@@ -24,7 +24,7 @@ export const useHistoricoStore = defineStore('Historico', {
 
     actions: {
         async buscaCamepoes() {
-            const response = await axios.get('http://ddragon.leagueoflegends.com/cdn/13.16.1/data/pt_BR/champion.json');
+            const response = await axios.get('https://ddragon.leagueoflegends.com/cdn/13.16.1/data/pt_BR/champion.json');
             const data = response.data;
             this.campeoes = data.data;
         },
@@ -126,7 +126,7 @@ export const useHistoricoStore = defineStore('Historico', {
                         if (bota > 0) return false;
                         else bota = 1;
                     }
-                    
+
                     if (inArray(valor.item, this.itensMiticos)) {
                         if (mitico > 0) return false;
                         else mitico = 1;
