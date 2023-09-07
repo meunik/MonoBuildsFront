@@ -5,7 +5,10 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/MonoBuildsFront/',
+  base: './',
+  build: {
+    outDir: 'docs',
+  },
   plugins: [vue()],
   resolve: {
     alias: {
