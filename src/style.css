@@ -71,7 +71,7 @@ button:focus-visible {
 #app {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   text-align: center;
 }
 
@@ -85,5 +85,59 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+
+
+
+
+.read-the-docs {
+  color: #888;
+}
+.monochamp {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  margin: 10px 0px;
+}
+.nome {
+  font-weight: 600;
+  font-size: 23px;
+  margin-right: 50px;
+  margin-left: 20px;
+  text-align: start;
+}
+.nome-sm {
+  font-weight: 600;
+  font-size: 10px;
+  margin-right: 20px;
+  margin-left: 5px;
+  text-align: start;
+}
+.icones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.icone, .item {
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  #app {
+    padding: 5px;
+  }
+  .nome {
+    font-weight: 600;
+    font-size: 10px;
+    margin-right: 20px;
+    margin-left: 5px;
+    text-align: start;
+  }
+  .icone, .item {
+    border-radius: 5px;
   }
 }

@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export const useHistoricoStore = defineStore('Historico', {
     state: () => ({
+        filtroCampeoes: '',
         listaItens: {},
         lista: [],
         campeoes: {},
@@ -27,6 +28,7 @@ export const useHistoricoStore = defineStore('Historico', {
             const response = await axios.get('https://ddragon.leagueoflegends.com/cdn/13.16.1/data/pt_BR/champion.json');
             const data = response.data;
             this.campeoes = data.data;
+            return data.data;
         },
         async buscaItensCompletos() {
             this.itensCompletos = this.todosItens.filter(item => !this.itensNaoCompletos.includes(item));
