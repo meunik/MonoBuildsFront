@@ -37,9 +37,9 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 const historico = useHistoricoStore();
 const champ = route.params.champ;
-const tamanhos = 60;
+const tamanho = 60;
 
-const tamanho = computed(() => (window.innerWidth < 768) ? 30 : 60);
+// const tamanho = computed(() => (window.innerWidth < 768) ? 30 : 60);
 const sm = computed(() => (window.innerWidth < 768) ? true : false);
 
 onMounted(() => {
