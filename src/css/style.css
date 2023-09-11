@@ -76,15 +76,18 @@ button.selected:focus-visible {
 
 
 html, body {
+  background: #242424;
+}
+html, body {
   padding-top: 5px;
   padding-bottom: 20px;
   color: #bdbdbd;
-  background-color: #242424;
 }
 
 body {
   display: flex;
   justify-content: center;
+  background-color: transparent;
 }
 
 .text-color {
@@ -99,7 +102,6 @@ body {
 
 .table>:not(caption)>*>* {
   background: transparent !important;
-  /* color: #d8b776; */
 }
 
 
