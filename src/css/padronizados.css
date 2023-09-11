@@ -97,3 +97,11 @@
 .mr-40 {margin-right: 40px;}
 .mr-44 {margin-right: 44px;}
 .mr-48 {margin-right: 48px;}
+
+
+.nowrap {
+    flex-wrap: nowrap;
+}
+.text-nowrap {
+    text-wrap: nowrap;
+}

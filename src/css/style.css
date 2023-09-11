@@ -131,6 +131,12 @@ body {
   margin-left: 5px;
   text-align: start;
 }
+.direitaDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
 .icones {
   display: flex;
   align-items: center;
@@ -162,9 +168,43 @@ body {
   outline: 4px auto #000000;
 }
 
+.amaDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  font-size: 13px;
+}
+.ama {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.divMonoNome {
+  padding: 5px;
+  position: relative;
+  display: block;
+  color: #d8b776;
+}
+.spanMono {
+  display: block;
+  width: 46px;
+  line-height: 14px;
+  font-size: 12px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+  height: 16px;
+}
+
 @media (max-width: 768px) {
   #app {
     padding: 5px;
+  }
+  body {
+    font-size: 10px;
   }
   .nome {
     font-size: 10px;
@@ -173,5 +213,8 @@ body {
   }
   .icone, .item {
     border-radius: 5px;
+  }
+  .amaDiv {
+    font-size: 9px;
   }
 }

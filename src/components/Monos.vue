@@ -17,13 +17,33 @@
           {{ lista.name }}
         </a>
       </div>
-      <div class="icones">
-        <img v-if="lista.item0" :src="`https://opgg-static.akamaized.net/meta/images/lol/item/${lista.item0}.png?image=q_auto,f_webp,w_64&v=1693294894548`" :width="tamanho" alt="Primeiro item" :height="tamanho" class="item">
-        <img v-if="lista.item1" :src="`https://opgg-static.akamaized.net/meta/images/lol/item/${lista.item1}.png?image=q_auto,f_webp,w_64&v=1693294894548`" :width="tamanho" alt="Primeiro item" :height="tamanho" class="item">
-        <img v-if="lista.item2" :src="`https://opgg-static.akamaized.net/meta/images/lol/item/${lista.item2}.png?image=q_auto,f_webp,w_64&v=1693294894548`" :width="tamanho" alt="Primeiro item" :height="tamanho" class="item">
-        <img v-if="lista.item3" :src="`https://opgg-static.akamaized.net/meta/images/lol/item/${lista.item3}.png?image=q_auto,f_webp,w_64&v=1693294894548`" :width="tamanho" alt="Primeiro item" :height="tamanho" class="item">
-        <img v-if="lista.item4" :src="`https://opgg-static.akamaized.net/meta/images/lol/item/${lista.item4}.png?image=q_auto,f_webp,w_64&v=1693294894548`" :width="tamanho" alt="Primeiro item" :height="tamanho" class="item">
-        <img v-if="lista.item5" :src="`https://opgg-static.akamaized.net/meta/images/lol/item/${lista.item5}.png?image=q_auto,f_webp,w_64&v=1693294894548`" :width="tamanho" alt="Primeiro item" :height="tamanho" class="item">
+      <div class="direitaDiv">
+        <!-- <div>
+          <span class="text-nowrap">{{ lista.play }} jogos</span>
+        </div>
+        <div class="amaDiv">
+          <div class="ama">
+            <span>V</span>
+            <span>{{ lista.win }}</span>
+          </div>
+          <div class="ama">
+            <span>/</span>
+            <span>/</span>
+          </div>
+          <div class="ama">
+            <span>D</span>
+            <span>{{ lista.lose }}</span>
+          </div>
+        </div> -->
+
+        <div class="icones">
+          <img v-if="lista.item0" :src="`https://opgg-static.akamaized.net/meta/images/lol/item/${lista.item0}.png?image=q_auto,f_webp,w_64&v=1693294894548`" :width="tamanho" alt="Primeiro item" :height="tamanho" class="item">
+          <img v-if="lista.item1" :src="`https://opgg-static.akamaized.net/meta/images/lol/item/${lista.item1}.png?image=q_auto,f_webp,w_64&v=1693294894548`" :width="tamanho" alt="Primeiro item" :height="tamanho" class="item">
+          <img v-if="lista.item2" :src="`https://opgg-static.akamaized.net/meta/images/lol/item/${lista.item2}.png?image=q_auto,f_webp,w_64&v=1693294894548`" :width="tamanho" alt="Primeiro item" :height="tamanho" class="item">
+          <img v-if="lista.item3" :src="`https://opgg-static.akamaized.net/meta/images/lol/item/${lista.item3}.png?image=q_auto,f_webp,w_64&v=1693294894548`" :width="tamanho" alt="Primeiro item" :height="tamanho" class="item">
+          <img v-if="lista.item4" :src="`https://opgg-static.akamaized.net/meta/images/lol/item/${lista.item4}.png?image=q_auto,f_webp,w_64&v=1693294894548`" :width="tamanho" alt="Primeiro item" :height="tamanho" class="item">
+          <img v-if="lista.item5" :src="`https://opgg-static.akamaized.net/meta/images/lol/item/${lista.item5}.png?image=q_auto,f_webp,w_64&v=1693294894548`" :width="tamanho" alt="Primeiro item" :height="tamanho" class="item">
+        </div>
       </div>
     </div>
   </div>
