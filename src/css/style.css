@@ -1,19 +1,3 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
 a {
   font-weight: 500;
   color: #646cff;
@@ -71,8 +55,8 @@ button.selected:focus-visible {
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
+  /* max-width: 1280px;
+  margin: 0 auto; */
   text-align: center;
 }
 
@@ -95,11 +79,27 @@ html, body {
   padding-top: 5px;
   padding-bottom: 20px;
   color: #bdbdbd;
+  background-color: #242424;
 }
 
 body {
   display: flex;
-  min-width: 320px;
+  justify-content: center;
+}
+
+.text-color {
+  color: #bdbdbd !important;
+}
+.text-amarela {
+  color: #d8b776 !important;
+}
+.text-azul {
+  color: #24b2ba !important;
+}
+
+.table>:not(caption)>*>* {
+  background: transparent !important;
+  /* color: #d8b776; */
 }
 
 
@@ -113,11 +113,12 @@ body {
   gap: 5px;
   margin: 10px 0px;
 }
+.nomeTd {
+  text-align: start;
+}
 .nome {
   font-weight: 600;
   font-size: 23px;
-  margin-right: 50px;
-  margin-left: 20px;
   text-align: start;
   color: #24b2ba;
 }
@@ -136,6 +137,14 @@ body {
   align-items: center;
   justify-content: center;
   gap: 20px;
+}
+.rankBorda {
+  position: absolute;
+  left: 0;
+}
+.iconePlayer {
+  margin-top: 6px;
+  margin-left: 6px;
 }
 .icones {
   display: flex;
@@ -172,7 +181,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1px;
+  gap: 3px;
   font-size: 13px;
 }
 .ama {
@@ -199,6 +208,7 @@ body {
   height: 16px;
 }
 
+
 @media (max-width: 768px) {
   #app {
     padding: 5px;
@@ -208,13 +218,25 @@ body {
   }
   .nome {
     font-size: 10px;
-    margin-right: 20px;
-    margin-left: 5px;
   }
   .icone, .item {
     border-radius: 5px;
   }
   .amaDiv {
     font-size: 9px;
+  }
+  .d-none-sm {
+    display: none;
+  }
+  .iconePlayer {
+    margin-top: 3px;
+    margin-left: 3px;
+  }
+  .tresPontinhos-sm {
+    display: block;
+    width: 46px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }

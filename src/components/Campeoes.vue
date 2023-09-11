@@ -106,7 +106,6 @@
   }
   .linesBtn {
     padding: 5px;
-    padding-bottom: 1px;
     border-radius: 0px;
   }
   .primeiro {

@@ -99,9 +99,6 @@
 .mr-48 {margin-right: 48px;}
 
 
-.nowrap {
-    flex-wrap: nowrap;
-}
-.text-nowrap {
-    text-wrap: nowrap;
-}
+.nowrap {flex-wrap: nowrap;}
+.text-nowrap {text-wrap: nowrap;}
+.font-bold {font-weight: bold;}
