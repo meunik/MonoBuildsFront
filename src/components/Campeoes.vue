@@ -4,12 +4,18 @@
 
     <div class="containerLine">
       <div v-for="(role, key) in champStore.roles" :key="key" class="divlines">
-        <button @click="champStore.roleSelect = (champStore.roleSelect != role.key) ? role.key : 'TODOS'" :class="{
-          linesBtn: 'linesBtn',
-          selected: (champStore.roleSelect == role.key)?'selected':'',
-          primeiro: (role.key == 'TODOS')?'primeiro':'',
-          ultimo: (role.key == 'SUPPORT')?'ultimo':''
-        }">
+        <button
+          @click="champStore.roleSelect = (champStore.roleSelect != role.key) ? role.key : 'TODOS'"
+          data-toggle="tooltip"
+          data-placement="top"
+          :title="role.name"
+          :class="{
+            linesBtn: 'linesBtn',
+            selected: (champStore.roleSelect == role.key)?'selected':'',
+            primeiro: (role.key == 'TODOS')?'primeiro':'',
+            ultimo: (role.key == 'SUPPORT')?'ultimo':''
+          }"
+        >
           <img :src="role.img" alt="" :width="tamanho" :height="tamanho">
         </button>
       </div>
