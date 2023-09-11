@@ -1,7 +1,7 @@
 <template>
   <div class="monoContainer">
-    <div>
-      <router-link :to="`/campeoes`">
+    <div class="mb-32">
+      <router-link :to="`/campeoes`" class="routeBtn">
         Campeoes
       </router-link>
     </div>

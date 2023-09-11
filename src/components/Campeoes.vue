@@ -1,43 +1,63 @@
-<script setup>
-  import { ref, computed, onMounted } from 'vue'
-  import { useHistoricoStore } from "@/stores/Historico";
-  import { useRoute } from "vue-router";
-
-  const route = useRoute();
-  const historico = useHistoricoStore();
-  const champ = route.params.champ;
-
-  const campeoes = computed(() => {
-    const filtro = historico.filtroCampeoes.toLowerCase();
-    const filtrados = Object.keys(historico.campeoes).filter((key) => {
-      const nomes = historico.campeoes[key].name.toLowerCase();
-      return nomes.includes(filtro);
-    });
-    return filtrados.map((item) => historico.campeoes[item]);
-    // let teste = filtrados.map((item) => historico.campeoes[item]);
-    // console.log(teste);
-    // return teste
-  });
-
-  onMounted(async () => {
-    await historico.buscaCamepoes();
-  });
-</script>
-
 <template>
   <div>
-    <input type="text" class="filtroCampeoes" v-model="historico.filtroCampeoes">
-    <div class="container">
-      <div v-for="campeao in campeoes" :key="campeao.key" class="divItem">
-        <router-link :to="`/mono/${campeao.id}`" data-toggle="tooltip" data-placement="top" :title="campeao.name">
-          <img :src="`http://ddragon.leagueoflegends.com/cdn/13.17.1/img/champion/${campeao.image.full}`" width="48" :alt="campeao.id" height="48">
+    <input type="text" class="filtroCampeoes" v-model="champStore.filtroCampeoes">
+
+    <div class="containerLine">
+      <div v-for="(role, key) in champStore.roles" :key="key" class="divItem">
+        <button @click="champStore.roleSelect = (champStore.roleSelect != role.key) ? role.key : 'TODOS'" :class="`linesBtn ${(champStore.roleSelect == role.key)?'selected':''}`">
+          <img :src="role.img" alt="" :width="tamanho" :height="tamanho">
+        </button>
+      </div>
+    </div>
+
+    <div class="containerChamp">
+      <div v-for="campeao in campeoes" :key="campeao.key">
+        <router-link
+          :to="`/mono/${campeao.id}`"
+          data-toggle="tooltip"
+          data-placement="top"
+          :title="campeao.name"
+          class="divChamp"
+        >
+          <img :src="`http://ddragon.leagueoflegends.com/cdn/13.17.1/img/champion/${campeao.image.full}`" width="48" height="48" :alt="campeao.id" class="imgChamp">
+          <span class="spanChamp">{{ campeao.name }}</span>
         </router-link>
       </div>
     </div>
   </div>
 </template>
 
+<script setup>
+  import { ref, computed, onMounted } from 'vue';
+  import { useCampeoesStore } from "@/stores/Campeoes";
+  import { useRoute } from "vue-router";
 
+  const route = useRoute();
+  const champStore = useCampeoesStore();
+  const champ = route.params.champ;
+  const tamanho = computed(() => (window.innerWidth < 768) ? 10 : 25);
+
+  const campeoes = computed(() => {
+    const filtro = champStore.filtroCampeoes.toLowerCase();
+    const filtrados = Object.keys(champStore.campeoes).filter((key) => {
+      const nomes = champStore.campeoes[key].name.toLowerCase();
+      
+      if (champStore.roleSelect == "TODOS") {
+        return nomes.includes(filtro);
+      } else {
+        let filtroLine = champStore.laneChamps[champStore.roleSelect].includes(champStore.campeoes[key].key);
+        return (filtroLine && nomes.includes(filtro));
+      }
+    });
+
+    return filtrados.map((item) => champStore.campeoes[item]);
+  });
+
+  onMounted(async () => {
+    await champStore.buscaCamepoes();
+    champStore.posicao();
+  });
+</script>
 
 <style>
   input {
@@ -50,11 +70,20 @@
   .filtroCampeoes {
     margin-bottom: 10px;
   }
-  .container {
+  .containerLine {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    gap: 5px;
+  }
+  .containerChamp {
+    max-width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
   }
   .divItem {
     padding: 5px;
@@ -62,5 +91,35 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+  .linesBtn {
+    padding: 5px;
+    padding-bottom: 1px;
+  }
+
+  .imgChamp {
+    border: 0;
+    vertical-align: middle;
+    max-width: 100%;
+  }
+  .divChamp {
+    padding: 5px;
+    position: relative;
+    display: block;
+    color: #d8b776;
+  }
+  .divChamp:hover {
+    color: #24b2ba;
+  }
+  .spanChamp {
+    display: block;
+    width: 46px;
+    line-height: 14px;
+    font-size: 12px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 2px;
+    height: 16px;
   }
 </style>

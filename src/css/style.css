@@ -32,14 +32,6 @@ a:hover {
   color: #535bf2;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -57,11 +49,22 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #d8b776;
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 4px auto #d8b776;
+}
+
+button.selected {
+  border-color: #d8b776;
+}
+button.selected:hover {
+  border-color: #000000;
+}
+button.selected:focus,
+button.selected:focus-visible {
+  outline: 4px auto #000000;
 }
 
 .card {
@@ -90,6 +93,16 @@ button:focus-visible {
 
 
 
+html, body {
+  padding-top: 5px;
+  padding-bottom: 20px;
+  color: #bdbdbd;
+}
+
+body {
+  display: flex;
+  min-width: 320px;
+}
 
 
 .read-the-docs {
@@ -108,6 +121,10 @@ button:focus-visible {
   margin-right: 50px;
   margin-left: 20px;
   text-align: start;
+  color: #24b2ba;
+}
+.nome:hover {
+  color: #d8b776;
 }
 .nome-sm {
   font-weight: 600;
@@ -126,16 +143,35 @@ button:focus-visible {
   border-radius: 10px;
 }
 
+.routeBtn {
+  border-radius: 8px;
+  color: #24b2ba;
+  padding: 5px 15px 8px 15px;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a9a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  margin-bottom: 30px;
+}
+.routeBtn:hover {
+  border: 1px solid #d8b7769c;
+  color: #d8b776;
+}
+.routeBtn:focus,
+.routeBtn:focus-visible {
+  outline: 4px auto #000000;
+}
+
 @media (max-width: 768px) {
   #app {
     padding: 5px;
   }
   .nome {
-    font-weight: 600;
     font-size: 10px;
     margin-right: 20px;
     margin-left: 5px;
-    text-align: start;
   }
   .icone, .item {
     border-radius: 5px;

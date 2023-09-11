@@ -1,18 +1,18 @@
 <template>
+  <router-link :to="`/campeoes`" class="logo" aria-label="Mono Builds">
+    <img src="/Mono-Builds.png" :width="274" :height="50" alt="Mono Builds" class="item">
+  </router-link>
   <router-view></router-view>
 </template>
 
-<style scoped>
+<style>
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 25px;
+  font-weight: 600;
 }
 </style>

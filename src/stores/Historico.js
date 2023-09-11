@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const useHistoricoStore = defineStore('Historico', {
     state: () => ({
-        filtroCampeoes: '',
+        versao: {},
         listaItens: {},
         lista: [],
         campeoes: {},
@@ -24,8 +24,15 @@ export const useHistoricoStore = defineStore('Historico', {
     }),
 
     actions: {
+        async versaoLol() {
+          const response = await axios.get('https://ddragon.leagueoflegends.com/realms/br.json');
+          const data = response.data;
+          this.versao = data;
+          return data;
+        },
         async buscaCamepoes() {
-            const response = await axios.get('https://ddragon.leagueoflegends.com/cdn/13.16.1/data/pt_BR/champion.json');
+            await this.versaoLol();
+            const response = await axios.get(`https://ddragon.leagueoflegends.com/cdn/${this.versao.n.champion}/data/pt_BR/champion.json`);
             const data = response.data;
             this.campeoes = data.data;
             return data.data;
