@@ -3,8 +3,13 @@
     <input type="text" class="filtroCampeoes" v-model="champStore.filtroCampeoes">
 
     <div class="containerLine">
-      <div v-for="(role, key) in champStore.roles" :key="key" class="divItem">
-        <button @click="champStore.roleSelect = (champStore.roleSelect != role.key) ? role.key : 'TODOS'" :class="`linesBtn ${(champStore.roleSelect == role.key)?'selected':''}`">
+      <div v-for="(role, key) in champStore.roles" :key="key" class="divlines">
+        <button @click="champStore.roleSelect = (champStore.roleSelect != role.key) ? role.key : 'TODOS'" :class="{
+          linesBtn: 'linesBtn',
+          selected: (champStore.roleSelect == role.key)?'selected':'',
+          primeiro: (role.key == 'TODOS')?'primeiro':'',
+          ultimo: (role.key == 'SUPPORT')?'ultimo':''
+        }">
           <img :src="role.img" alt="" :width="tamanho" :height="tamanho">
         </button>
       </div>
@@ -35,7 +40,7 @@
   const route = useRoute();
   const champStore = useCampeoesStore();
   const champ = route.params.champ;
-  const tamanho = computed(() => (window.innerWidth < 768) ? 10 : 25);
+  const tamanho = 25;
 
   const campeoes = computed(() => {
     const filtro = champStore.filtroCampeoes.toLowerCase();
@@ -70,13 +75,6 @@
   .filtroCampeoes {
     margin-bottom: 10px;
   }
-  .containerLine {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-  }
   .containerChamp {
     max-width: 800px;
     display: flex;
@@ -85,8 +83,16 @@
     align-items: center;
     gap: 5px;
   }
-  .divItem {
-    padding: 5px;
+  .containerLine {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .divlines {
+    padding: 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -95,6 +101,13 @@
   .linesBtn {
     padding: 5px;
     padding-bottom: 1px;
+    border-radius: 0px;
+  }
+  .primeiro {
+    border-radius: 8px 0px 0px 8px;
+  }
+  .ultimo {
+    border-radius: 0px 8px 8px 0px;
   }
 
   .imgChamp {

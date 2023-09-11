@@ -57,7 +57,7 @@ button:focus-visible {
 }
 
 button.selected {
-  border-color: #d8b776;
+  border-color: #d8b7769c;
 }
 button.selected:hover {
   border-color: #000000;
