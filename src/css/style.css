@@ -200,7 +200,6 @@ body {
 }
 .spanMono {
   display: block;
-  width: 46px;
   line-height: 14px;
   font-size: 12px;
   overflow: hidden;

@@ -84,20 +84,14 @@ export const useCampeoesStore = defineStore('Campeoes', {
       try {
         const respostaEstatisticasCampeoes = await axios.get("https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-champion-statistics/global/default/rcp-fe-lol-champion-statistics.js");
         const dadosEstatisticasCampeoes = respostaEstatisticasCampeoes.data;
-    
-        // const regex = /exports\s*=\s*(\{[^]+?\})\s*,/;
-        // const regex = /{[^{}]*}/;
+
         const regex = /exports\s*=\s*JSON\.parse\('(.+?)'\)/;
         const correspondencias = regex.exec(dadosEstatisticasCampeoes);
-        // console.log(correspondencias);
     
         if (correspondencias && correspondencias.length > 1) {
           const objetoJSONString = correspondencias[1];
           const estatisticasFuncoes = JSON.parse(objetoJSONString);
           console.log(estatisticasFuncoes);
-
-          // const correspondencia = correspondencias[1].replace(/([A-Z0-9]*):/g, '"$1":').replace(/\.\d+/g, (correspondencia) => parseFloat(correspondencia));
-          // const estatisticasFuncoes = JSON.parse(correspondencia);
     
           const respostaChamadas = await axios.get("https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-summary.json");
           const dadosChamadas = respostaChamadas.data;
@@ -116,16 +110,12 @@ export const useCampeoesStore = defineStore('Campeoes', {
               });
             }
           });
-          // console.log(todosCampeoes);
     
           todasFuncoes.forEach((funcao) => {
-            // const nomeFuncao = funcao === "UTILITY" ? "SUPPORT" : funcao;
-    
             for (const [campeao, taxa] of Object.entries(estatisticasFuncoes[funcao])) {
               todosCampeoes[campeao][funcao]['taxaDeJogo'] = parseFloat((taxa * 100).toFixed(5));
             }
           });
-          // console.log(todasFuncoes);
     
           const respostaVersao = await axios.get("https://raw.communitydragon.org/latest/content-metadata.json");
           const dadosVersao = respostaVersao.data;

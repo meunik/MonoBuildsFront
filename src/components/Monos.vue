@@ -8,16 +8,16 @@
 
     <div class="table-responsive">
       <table class="table align-middle table-borderless table-dark table-hover">
-          <thead class="thead-listagem">
-            <tr>
-              <th scope="col"></th>
-              <th scope="col">Nicks</th>
-              <th scope="col">{{(innerWidth < 768)?'R':'Rank'}}</th>
-              <th scope="col">{{(innerWidth < 768)?'J':'Jogos'}}</th>
-              <th scope="col" class="d-none-sm">V/D</th>
-              <th scope="col">Itens</th>
-            </tr>
-          </thead>
+        <thead class="thead-listagem">
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Nicks</th>
+            <th scope="col">{{(innerWidth < 768)?'R':'Rank'}}</th>
+            <th scope="col">{{(innerWidth < 768)?'J':'Jogos'}}</th>
+            <th scope="col" class="d-none-sm">V/D</th>
+            <th scope="col">Itens</th>
+          </tr>
+        </thead>
 
         <tbody class="tbody-listagem">
           <tr v-for="lista in historico.listaItens" :key="lista.id">
