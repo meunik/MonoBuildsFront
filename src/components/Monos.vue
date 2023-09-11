@@ -30,19 +30,19 @@
                 </div>
               </div>
             </td>
-            <td class="nomeTd">
+            <td class="nomeTd tdPadding-sm">
               <a
                 :href="`https://www.op.gg/summoners/br/${lista.name}`"
                 target="_blank"
-                class="nome tresPontinhos"
+                class="nome tresPontinhos-sm"
               >
                 {{ lista.name }}
               </a>
             </td>
-            <td class="">
+            <td class="tdPadding-sm">
               <img v-if="lista.soloQ" :src="lista.soloQ.tier_info.tier_image_url" :width="tamanho" :alt="lista.campeaoName" :height="tamanho" class="icone">
             </td>
-            <td class="text-color">
+            <td class="text-color tdPadding-sm">
               <span class="text-nowrap">{{ lista.play }} <span class="d-none-sm">jogos</span></span>
             </td>
             <td class="d-none-sm text-color">

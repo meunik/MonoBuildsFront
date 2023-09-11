@@ -219,6 +219,9 @@ body {
   .nome {
     font-size: 10px;
   }
+  .icones {
+    gap: 2px;
+  }
   .icone, .item {
     border-radius: 5px;
   }
@@ -238,5 +241,9 @@ body {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+  }
+  .tdPadding-sm {
+    padding-left: 2px !important;
+    padding-right: 2px !important;
   }
 }
