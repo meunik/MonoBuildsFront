@@ -90,7 +90,7 @@ const champ = route.params.champ;
 const tamanhos = 60;
 
 const tamanho = computed(() => (window.innerWidth < 768) ? 25 : 60);
-const tamanhoMenos = computed(() => (window.innerWidth < 768) ? 6 : 12);
+const tamanhoMenos = computed(() => (window.innerWidth < 768) ? 4 : 12);
 const sm = computed(() => (window.innerWidth < 768) ? true : false);
 const innerWidth = computed(() => window.innerWidth);
 
