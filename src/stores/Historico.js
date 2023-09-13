@@ -41,7 +41,6 @@ export const useHistoricoStore = defineStore('Historico', {
       this.itensCompletos = this.todosItens.filter(item => !this.itensNaoCompletos.includes(item));
     },
 
-
     async summoners(champ) {
       this.listaItens = {};
       await this.buscaCamepoes();
@@ -50,12 +49,8 @@ export const useHistoricoStore = defineStore('Historico', {
       const url = `https://op.gg/api/v1.0/internal/bypass/rankings/br/champions/${champ}?&hl=pt_BR&limit=10`;
       const games = await axios.get(url);
       const monos = games.data.data;
-      
-      console.log(monos);
 
       monos.forEach(async mono => await this.listando(mono));
-      
-      console.log(this.listaItens);
     },
     async listando(player) {
       const stat = player.most_champion_stat;
@@ -85,9 +80,12 @@ export const useHistoricoStore = defineStore('Historico', {
       const games = await axios.get(url);
       const jogos = games.data.data;
 
-      await this.itens(jogos, key);
+      if (jogos.length > 0) {
 
-      this.lista.push(jogos);
+        await this.itens(jogos, key);
+        this.lista.push(jogos);
+
+      } else delete this.listaItens[key];
     },
     async itens(jogos, key) {
       let itens = {};
@@ -160,7 +158,6 @@ export const useHistoricoStore = defineStore('Historico', {
         }
       }
 
-      // const topSix = itensArray.slice(0, 6);
       const topSix = itensArray;
       const topSixItens = [];
       
