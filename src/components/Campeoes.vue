@@ -30,7 +30,7 @@
           :title="campeao.name"
           class="divChamp"
         >
-          <img :src="`http://ddragon.leagueoflegends.com/cdn/13.17.1/img/champion/${campeao.image.full}`" :width="tamanhoChamp" :height="tamanhoChamp" :alt="campeao.id" class="imgChamp">
+          <img :src="`http://ddragon.leagueoflegends.com/cdn/${champStore.versao.n.champion}/img/champion/${campeao.image.full}`" :width="tamanhoChamp" :height="tamanhoChamp" :alt="campeao.id" class="imgChamp">
           <span class="spanChamp" :style="`width: ${tamanhoChamp}px;`">{{ campeao.name }}</span>
         </router-link>
       </div>
