@@ -96,5 +96,6 @@ const innerWidth = computed(() => window.innerWidth);
 
 onMounted(() => {
   historico.summoners(champ);
+  console.log(process.env.NODE_ENV);
 })
 </script>
