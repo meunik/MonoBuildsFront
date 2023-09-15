@@ -74,7 +74,7 @@
               </td>
               <td class="tdPadding-sm">
                 <a
-                  class="btn btn-dark btnVerMais"
+                  class="btn btn-dark btnVerMais pb-0"
                   data-bs-toggle="collapse"
                   :href="`#collapse-${lista.id}`"
                   role="button"
@@ -104,6 +104,23 @@
               </td>
             </tr>
           </template>
+            <tr class="noHover">
+              <td colspan="7">
+                <div class="spinner-border" role="status" v-if="historico.carregandoMais">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <div v-else>
+                  <a
+                    v-if="historico.btnMais"
+                    class="btn btn-dark btnVerMaisLista"
+                    @click="historico.maisSummoners(champ)"
+                  >
+                    <i class="bi bi-plus-lg"></i>
+                  </a>
+                  <span v-else class="text-secondary">Limite Atingido</span>
+                </div>
+              </td>
+            </tr>
         </tbody>
       </table>
     </div>

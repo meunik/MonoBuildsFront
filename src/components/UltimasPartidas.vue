@@ -7,18 +7,29 @@
       <template v-for="partida in partidas" :key="`partidas-${partida.id}`">
         <tr :class="`trPartidas tr-${status(partida)}`">
           <td>
+            <div v-if="sm" class="matchupSm text-color">
+              <img v-if="partida.matchup" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/champion/${partida.matchup.pro}.png`" :width="(tamanho/2)" :height="(tamanho/2)" class="icone">
+              <img v-if="partida.matchup" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/champion/${partida.matchup.contra}.png`" :width="(tamanho/2)" :height="(tamanho/2)" class="icone">
+            </div>
+            <div v-else class="icones">
+              <img v-if="partida.matchup" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/champion/${partida.matchup.pro}.png`" :width="tamanho" :height="tamanho" class="icone">
+              <span><i class="bi bi-x-lg"></i></span>
+              <img v-if="partida.matchup" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/champion/${partida.matchup.contra}.png`" :width="tamanho" :height="tamanho" class="icone">
+            </div>
+          </td>
+          <td>
             <div class="text-color">
               <img :src="champStore.roles[partida.myData.position].img" :width="tamanho/2" :height="tamanho/2">
             </div>
           </td>
-          <td>
+          <td class="d-none-sm">
             <div class="text-color">
               <img :src="partida.myData.tier_info.tier_image_url" :width="tamanho" :height="tamanho" class="icone">
               <span class="pdl">: {{partida.myData.tier_info.lp}}</span>
             </div>
           </td>
-          <td class="d-none-sm text-color">
-            <div>
+          <td class="text-color">
+            <div class="white-space-nowrap">
               <span class="text-info">{{ partida.myData.stats.kill }}</span>
               <span> / </span>
               <span class="text-danger">{{ partida.myData.stats.death }}</span>
@@ -28,8 +39,14 @@
           </td>
           <td>
             <div class="runas text-color">
-                <img :src="`https://opgg-static.akamaized.net/meta/images/lol/perkStyle/${partida.myData.rune.primary_page_id}.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="(tamanho/2)-3" :height="(tamanho/2)-3">
+                <img :src="`https://opgg-static.akamaized.net/meta/images/lol/perk/${partida.myData.rune.primary_rune_id}.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="(tamanho/2)-3" :height="(tamanho/2)-3">
                 <img :src="`https://opgg-static.akamaized.net/meta/images/lol/perkStyle/${partida.myData.rune.secondary_page_id}.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="(tamanho/2)-3" :height="(tamanho/2)-3">
+            </div>
+          </td>
+          <td>
+            <div class="runas text-color">
+                <img :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${partida.spells.d}.png`" :width="(tamanho/2)-3" :height="(tamanho/2)-3" class="spells">
+                <img :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${partida.spells.f}.png`" :width="(tamanho/2)-3" :height="(tamanho/2)-3" class="spells">
             </div>
           </td>
           <td>
@@ -37,6 +54,12 @@
               <template v-for="(item, index) in partida.myData.items" :key="index">
                 <img v-if="item != 0" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${item}.png`" :width="tamanho" :height="tamanho" class="item">
               </template>
+            </div>
+          </td>
+          <td>
+            <div class="tempoTrinket text-color">
+              <img :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${partida.myData.trinket_item}.png`" :width="tamanho/2" :height="tamanho/2" class="trinket">
+              <span class="text-sm">{{ partida.tempo }} <span class="d-none-sm">atrás</span></span>
             </div>
           </td>
         </tr>

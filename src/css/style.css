@@ -157,11 +157,13 @@ body {
 .icone, .item {
   border-radius: 10px;
 }
-.btnVerMais {
+.spells, .trinket {
+  border-radius: 6px;
+}
+.btnVerMais, .btnVerMaisLista {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding-bottom: 0px;
   background: transparent;
   border: none;
 }
@@ -207,6 +209,29 @@ body {
   gap: 2px;
 }
 
+.matchupSm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tempoTrinket {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+}
+.text-sm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  line-height: 12px;
+}
+
 
 .divMonoNome {
   padding: 5px;
@@ -233,15 +258,18 @@ body {
   border-radius: 10px;
 }
 
-/* .tr-vermelha {
+.tr-vermelha {
   background: #202a3e50;
+  border-left: 4px solid #202a3e;
 }
 .tr-azul {
   background: #472a2f50;
+  border-left: 4px solid #472a2f;
 }
 .tr-cinza {
   background: #212425;
-} */
+  border-left: 4px solid #414141;
+}
 
 
 tbody>tr:hover.noHover {
@@ -299,6 +327,15 @@ tbody>tr:hover.noHover {
     width: 15px;
   }
   .table>:not(caption)>*>* {
-    padding: 3px 8px;
+    padding: 3px 3px;
+  }
+  .spells, .trinket {
+    border-radius: 3px;
+  }
+  .tempoTrinket {
+    gap: 0px;
+  }
+  .text-sm {
+    font-size: 9px;
   }
 }

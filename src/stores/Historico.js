@@ -1,11 +1,15 @@
 import { defineStore } from "pinia";
 import axios from 'axios';
+import moment from 'moment';
 
 export const useHistoricoStore = defineStore('Historico', {
   state: () => ({
     versao: {},
     listaItens: {},
     lista: [],
+    limit: 10,
+    carregandoMais: false,
+    btnMais: true,
     campeoes: {},
     itensRiot: {},
     todosItens: [
@@ -21,6 +25,17 @@ export const useHistoricoStore = defineStore('Historico', {
     itensMiticos: [
       2065, 6617, 6620, 3001, 3190, 6667, 4644, 6656, 6657, 6662, 6691, 3156, 6692, 6653, 6655, 4636, 3152, 4633, 3124, 6630, 6665, 3084, 6631, 6632, 3078, 6671, 6675, 3031, 3142
     ],
+    spells: {
+      1: 'SummonerBoost',
+      3: 'SummonerExhaust',
+      4: 'SummonerFlash',
+      6: 'SummonerHaste',
+      7: 'SummonerHeal',
+      11: 'SummonerSmite',
+      12: 'SummonerTeleport',
+      14: 'SummonerDot',
+      21: 'SummonerBarrier',
+    }
   }),
 
   actions: {
@@ -41,13 +56,41 @@ export const useHistoricoStore = defineStore('Historico', {
       this.itensCompletos = this.todosItens.filter(item => !this.itensNaoCompletos.includes(item));
     },
 
+    async maisSummoners(champ) {
+      this.carregandoMais = true;
+
+      try {
+        await this.versaoLol();
+        await this.buscaCamepoes();
+        await this.buscaItensCompletos();
+  
+        const limitAnterior = this.limit - 1;
+        this.limit = this.limit + 10;
+        
+        const url = `https://op.gg/api/v1.0/internal/bypass/rankings/br/champions/${champ}?&hl=pt_BR&limit=${this.limit}`;
+        const games = await axios.get(url);
+        const monos = games.data.data;
+
+        monos.forEach(async (mono, index) => {if (index > limitAnterior) await this.listando(mono)});
+  
+        console.log(JSON.parse(JSON.stringify(this.listaItens)));
+      } catch (error) {
+        console.error(error);
+        this.btnMais = false;
+      }
+
+      this.carregandoMais = false;
+    },
+
     async summoners(champ) {
+      this.btnMais = true;
+      this.limit = 10;
       this.listaItens = {};
       await this.versaoLol();
       await this.buscaCamepoes();
       await this.buscaItensCompletos();
       
-      const url = `https://op.gg/api/v1.0/internal/bypass/rankings/br/champions/${champ}?&hl=pt_BR&limit=10`;
+      const url = `https://op.gg/api/v1.0/internal/bypass/rankings/br/champions/${champ}?&hl=pt_BR&limit=${this.limit}`;
       const games = await axios.get(url);
       const monos = games.data.data;
 
@@ -85,17 +128,11 @@ export const useHistoricoStore = defineStore('Historico', {
       const games = await axios.get(url);
       const jogos = games.data.data;
 
-      if (html) {
-        console.log(JSON.parse(JSON.stringify(jogos)));
-        this.carregando = false;
-        return jogos;
-      }
+      if (html) return await this.matchup(jogos);
       
       if (jogos.length > 0) {
-
         await this.itens(jogos, key);
         this.lista.push(jogos);
-
       } else delete this.listaItens[key];
     },
     async itens(jogos, key) {
@@ -178,6 +215,38 @@ export const useHistoricoStore = defineStore('Historico', {
         ...this.listaItens[key],
         ...topSixItens
       };
+    },
+    
+    async matchup(jogos) {
+      const jogosAtualizados = await Promise.all(jogos.map(async (jogo) => {
+        const tempo = moment(jogo.created_at).fromNow(true);
+        let monoId = jogo.myData.participant_id;
+        let position = jogo.myData.position;
+
+        let campeaoKey = Object.keys(this.campeoes).find(item => this.campeoes[item].key == jogo.myData.champion_id);
+        let match = { pro: this.campeoes[campeaoKey].id, contra: 0 };
+    
+        await jogo.participants.forEach(e => {
+          if (e.position == position && e.participant_id != monoId) {
+            campeaoKey = Object.keys(this.campeoes).find(item => this.campeoes[item].key == e.champion_id);
+            match.contra = this.campeoes[campeaoKey].id;
+          }
+        });
+    
+        return {
+          ...jogo,
+          spells: {
+            d: this.spells[jogo.myData.spells[0]],
+            f: this.spells[jogo.myData.spells[1]]
+          },
+          matchup: match,
+          tempo: tempo
+        };
+      }));
+
+      console.log(jogosAtualizados);
+      this.carregando = false;
+      return jogosAtualizados;
     },
   }
 })

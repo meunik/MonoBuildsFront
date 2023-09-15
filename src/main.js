@@ -11,6 +11,29 @@ import './css/padronizados.css';
 
 import router from "@/router";
 
+import moment from 'moment';
+
+moment.locale('pt-br', {
+  relativeTime : {
+    future: "em %s",
+    past:   "%s atrás",
+    s  : 'a few seg',
+    ss : '%d seg',
+    m:  "a min",
+    mm: "%d min",
+    h:  "%dh",
+    hh: "%dh",
+    d:  "%dd",
+    dd: "%dd",
+    w:  "%ds",
+    ww: "%ds",
+    M:  "%dm",
+    MM: "%dm",
+    y:  "a ano",
+    yy: "%d anos"
+  }
+});
+
 const pinia = createPinia()
 const app = createApp(App)
 
