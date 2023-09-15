@@ -65,11 +65,22 @@
               <td>
                 <div class="icones">
                   <img v-if="lista.item0" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item0}.png`" :width="tamanho" :height="tamanho" class="item">
+                  <div v-else class="semItem item" :style="`width: ${tamanho}px; height: ${tamanho}px;`"></div>
+
                   <img v-if="lista.item1" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item1}.png`" :width="tamanho" :height="tamanho" class="item">
+                  <div v-else class="semItem item" :style="`width: ${tamanho}px; height: ${tamanho}px;`"></div>
+
                   <img v-if="lista.item2" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item2}.png`" :width="tamanho" :height="tamanho" class="item">
+                  <div v-else class="semItem item" :style="`width: ${tamanho}px; height: ${tamanho}px;`"></div>
+
                   <img v-if="lista.item3" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item3}.png`" :width="tamanho" :height="tamanho" class="item">
+                  <div v-else class="semItem item" :style="`width: ${tamanho}px; height: ${tamanho}px;`"></div>
+
                   <img v-if="lista.item4" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item4}.png`" :width="tamanho" :height="tamanho" class="item">
+                  <div v-else class="semItem item" :style="`width: ${tamanho}px; height: ${tamanho}px;`"></div>
+
                   <img v-if="lista.item5" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item5}.png`" :width="tamanho" :height="tamanho" class="item">
+                  <div v-else class="semItem item" :style="`width: ${tamanho}px; height: ${tamanho}px;`"></div>
                 </div>
               </td>
               <td class="tdPadding-sm">

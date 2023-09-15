@@ -53,12 +53,14 @@
             <div class="icones">
               <template v-for="(item, index) in partida.myData.items" :key="index">
                 <img v-if="item != 0" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${item}.png`" :width="tamanho" :height="tamanho" class="item">
+                <div v-else class="semItem item" :style="`width: ${tamanho}px; height: ${tamanho}px;`"></div>
               </template>
             </div>
           </td>
           <td>
             <div class="tempoTrinket text-color">
-              <img :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${partida.myData.trinket_item}.png`" :width="tamanho/2" :height="tamanho/2" class="trinket">
+              <img v-if="partida.myData.trinket_item" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${partida.myData.trinket_item}.png`" :width="tamanho/2" :height="tamanho/2" class="trinket">
+              <div v-else class="semItem trinket" :style="`width: ${tamanho/2}px; height: ${tamanho/2}px;`"></div>
               <span class="text-sm">{{ partida.tempo }} <span class="d-none-sm">atrás</span></span>
             </div>
           </td>

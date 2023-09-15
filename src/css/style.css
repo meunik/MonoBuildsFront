@@ -167,6 +167,9 @@ body {
   background: transparent;
   border: none;
 }
+.semItem {
+  background-color: #00000036;
+}
 
 .routeBtn {
   border-radius: 8px;
@@ -259,12 +262,12 @@ body {
 }
 
 .tr-vermelha {
-  background: #202a3e50;
-  border-left: 4px solid #202a3e;
-}
-.tr-azul {
   background: #472a2f50;
   border-left: 4px solid #472a2f;
+}
+.tr-azul {
+  background: #202a3e50;
+  border-left: 4px solid #202a3e;
 }
 .tr-cinza {
   background: #212425;
