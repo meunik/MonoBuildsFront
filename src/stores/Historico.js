@@ -8,8 +8,11 @@ export const useHistoricoStore = defineStore('Historico', {
     listaItens: {},
     lista: [],
     limit: 10,
+    limitHistorico: 10,
     carregandoMais: false,
+    carregandoMaisHistorico: false,
     btnMais: true,
+    btnMaisHistorico: true,
     campeoes: {},
     itensRiot: {},
     todosItens: [
@@ -73,13 +76,21 @@ export const useHistoricoStore = defineStore('Historico', {
 
         monos.forEach(async (mono, index) => {if (index > limitAnterior) await this.listando(mono)});
   
-        console.log(JSON.parse(JSON.stringify(this.listaItens)));
+        // console.log(JSON.parse(JSON.stringify(this.listaItens)));
       } catch (error) {
         console.error(error);
         this.btnMais = false;
       }
 
       this.carregandoMais = false;
+    },
+    async maisHistorico(summonerId, data, champId) {
+      this.carregandoMaisHistorico = true;
+      const url = `https://op.gg/api/v1.0/internal/bypass/games/br/summoners/${summonerId}?&ended_at=${data}&limit=20&hl=pt_BR&game_type=soloranked&champion=${champId}`;
+      const games = await axios.get(url);
+      const jogos = games.data.data;
+
+      return await this.matchup(jogos, true);
     },
 
     async summoners(champ) {
@@ -96,7 +107,7 @@ export const useHistoricoStore = defineStore('Historico', {
 
       monos.forEach(async mono => await this.listando(mono));
 
-      console.log(JSON.parse(JSON.stringify(this.listaItens)));
+      // console.log(JSON.parse(JSON.stringify(this.listaItens)));
     },
     async listando(player) {
       const stat = player.most_champion_stat;
@@ -217,7 +228,7 @@ export const useHistoricoStore = defineStore('Historico', {
       };
     },
     
-    async matchup(jogos) {
+    async matchup(jogos, mais) {
       const jogosAtualizados = await Promise.all(jogos.map(async (jogo) => {
         const tempo = moment(jogo.created_at).fromNow(true);
         let monoId = jogo.myData.participant_id;
@@ -239,13 +250,16 @@ export const useHistoricoStore = defineStore('Historico', {
             d: this.spells[jogo.myData.spells[0]],
             f: this.spells[jogo.myData.spells[1]]
           },
+          btnMaisHistorico: true,
           matchup: match,
           tempo: tempo
         };
       }));
 
-      console.log(jogosAtualizados);
-      this.carregando = false;
+      // console.log(jogosAtualizados);
+      if (mais) this.carregandoMaisHistorico = false;
+      else this.carregando = false;
+
       return jogosAtualizados;
     },
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="spinner-border" role="status" v-if="carregando">
+  <div class="spinner-border mt-3" role="status" v-if="carregando">
     <span class="visually-hidden">Loading...</span>
   </div>
   <table class="table align-middle table-borderless table-dark table-hover" v-else>
@@ -66,6 +66,23 @@
           </td>
         </tr>
       </template>
+        <tr class="noHover">
+          <td colspan="8">
+            <div class="spinner-border" role="status" v-if="historico.carregandoMaisHistorico">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div v-else>
+              <a
+                v-if="btnMaisHistorico"
+                class="btn btn-dark btnVerMaisLista"
+                @click="buscarMaisPartidas(partidas)"
+              >
+                <i class="bi bi-plus-lg"></i>
+              </a>
+              <span v-else class="text-secondary">Limite Atingido</span>
+            </div>
+          </td>
+        </tr>
     </tbody>
   </table>
 </template>
@@ -74,6 +91,7 @@
 import { ref, computed, defineProps, onMounted } from 'vue';
 import { useHistoricoStore } from "@/stores/Historico";
 import { useCampeoesStore } from "@/stores/Campeoes";
+import moment from 'moment';
 
 const historico = useHistoricoStore();
 const champStore = useCampeoesStore();
@@ -94,10 +112,24 @@ const props = defineProps({
 });
 
 let partidas = ref([]);
+let btnMaisHistorico = ref(true);
 const tamanho = computed(() => (window.innerWidth < 768) ? 25 : 60);
 const sm = computed(() => (window.innerWidth < 768) ? true : false);
 const carregando = computed(() => (partidas.value.length > 0) ? false : true);
 const versao = computed(() => historico.versao.n.champion);
+
+const buscarMaisPartidas = async (matchs) => {
+  const dataUltimaPartida = matchs[matchs.length-1].created_at;
+  const dataProxBusca = moment(dataUltimaPartida).add(1, 'm').format();
+  try {
+    const novasPartidas = await historico.maisHistorico(props.summoner_id, dataProxBusca, props.campeaoId);
+    if (novasPartidas.length == 0) btnMaisHistorico.value = false;
+    else novasPartidas.forEach(partida => partidas.value.push(partida));
+  } catch (error) {
+    console.error(error);
+    btnMaisHistorico.value = false;
+  }
+};
 
 const status = (partida) => {
   if (partida.is_remake) return 'cinza';
