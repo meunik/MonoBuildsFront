@@ -20,58 +20,90 @@
         </thead>
 
         <tbody class="tbody-listagem">
-          <tr v-for="lista in historico.listaItens" :key="lista.id">
-            <td>
-              <div class="icones">
-                <img v-if="lista.campeaoNameId" :src="`https://opgg-static.akamaized.net/meta/images/lol/champion/${lista.campeaoNameId}.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&amp;v=1693294894548`" :width="tamanho" :alt="lista.campeaoName" :height="tamanho" class="icone">
-                <div class="position-relative">
-                  <img v-if="lista.icon" :src="lista.icon" :width="tamanho-tamanhoMenos" alt="icone do invocador" :height="tamanho-tamanhoMenos" class="iconePlayer">
-                  <img v-if="lista.soloQ" :src="lista.soloQ.tier_info.border_image_url" :width="tamanho" alt="icone do invocador" :height="tamanho" class="rankBorda">
+          <template v-for="lista in historico.listaItens" :key="lista.id">
+            <tr>
+              <td>
+                <div class="icones">
+                  <img v-if="lista.campeaoNameId" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/champion/${lista.campeaoNameId}.png`" :width="tamanho" :alt="lista.campeaoName" :height="tamanho" class="icone">
+                  <div class="position-relative">
+                    <img v-if="lista.icon" :src="lista.icon" :width="tamanho-tamanhoMenos" alt="icone do invocador" :height="tamanho-tamanhoMenos" class="iconePlayer">
+                    <img v-if="lista.soloQ" :src="lista.soloQ.tier_info.border_image_url" :width="tamanho" alt="icone do invocador" :height="tamanho" class="rankBorda">
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td class="nomeTd tdPadding-sm">
-              <a
-                :href="`https://www.op.gg/summoners/br/${lista.name}`"
-                target="_blank"
-                class="nome tresPontinhos-sm"
-              >
-                {{ lista.name }}
-              </a>
-            </td>
-            <td class="tdPadding-sm">
-              <img v-if="lista.soloQ" :src="lista.soloQ.tier_info.tier_image_url" :width="tamanho" :alt="lista.campeaoName" :height="tamanho" class="icone">
-            </td>
-            <td class="text-color tdPadding-sm">
-              <span class="text-nowrap">{{ lista.play }} <span class="d-none-sm">jogos</span></span>
-            </td>
-            <td class="d-none-sm text-color">
-              <div class="amaDiv">
-                <div class="ama text-end">
-                  <span>V</span>
-                  <span class="text-primary">{{ lista.win }}</span>
+              </td>
+              <td class="nomeTd tdPadding-sm">
+                <a
+                  :href="`https://www.op.gg/summoners/br/${lista.name}`"
+                  target="_blank"
+                  class="nome tresPontinhos-sm"
+                >
+                  {{ lista.name }}
+                </a>
+              </td>
+              <td class="tdPadding-sm">
+                <img v-if="lista.soloQ" :src="lista.soloQ.tier_info.tier_image_url" :width="tamanho" :alt="lista.campeaoName" :height="tamanho" class="icone">
+              </td>
+              <td class="text-color tdPadding-sm">
+                <span class="text-nowrap">{{ lista.play }} <span class="d-none-sm">jogos</span></span>
+              </td>
+              <td class="d-none-sm text-color">
+                <div class="amaDiv">
+                  <div class="ama text-end">
+                    <span>V</span>
+                    <span class="text-primary">{{ lista.win }}</span>
+                  </div>
+                  <div class="ama">
+                    <span>/</span>
+                    <span>/</span>
+                  </div>
+                  <div class="ama text-start">
+                    <span>D</span>
+                    <span class="text-danger">{{ lista.lose }}</span>
+                  </div>
                 </div>
-                <div class="ama">
-                  <span>/</span>
-                  <span>/</span>
+              </td>
+              <td>
+                <div class="icones">
+                  <img v-if="lista.item0" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item0}.png`" :width="tamanho" :height="tamanho" class="item">
+                  <img v-if="lista.item1" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item1}.png`" :width="tamanho" :height="tamanho" class="item">
+                  <img v-if="lista.item2" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item2}.png`" :width="tamanho" :height="tamanho" class="item">
+                  <img v-if="lista.item3" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item3}.png`" :width="tamanho" :height="tamanho" class="item">
+                  <img v-if="lista.item4" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item4}.png`" :width="tamanho" :height="tamanho" class="item">
+                  <img v-if="lista.item5" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item5}.png`" :width="tamanho" :height="tamanho" class="item">
                 </div>
-                <div class="ama text-start">
-                  <span>D</span>
-                  <span class="text-danger">{{ lista.lose }}</span>
+              </td>
+              <td class="tdPadding-sm">
+                <a
+                  class="btn btn-dark btnVerMais"
+                  data-bs-toggle="collapse"
+                  :href="`#collapse-${lista.id}`"
+                  role="button"
+                  aria-expanded="false"
+                  :aria-controls="`collapse-${lista.id}`"
+                  @click="visible[lista.id] = !visible[lista.id]"
+                  :style="`height: ${tamanho}px;`"
+                >
+                  <i v-if="visible[lista.id]" class="bi bi-caret-up-fill"></i>
+                  <i v-else class="bi bi-caret-down-fill"></i>
+                </a>
+              </td>
+            </tr>
+            <tr class="noHover">
+              <td colspan="7" class="tdPadding-sm p-0">
+                <div class="collapse" :id="`collapse-${lista.id}`">
+                  <div v-if="visible[lista.id]">
+                    <UltimasPartidas
+                      ref="partidas"
+                      :summoner_id="lista.summoner_id"
+                      :internal_name="lista.internal_name"
+                      :campeaoId="lista.campeaoId"
+                    />
+                    <hr>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td>
-              <div class="icones">
-                <img v-if="lista.item0" :src="`https://opgg-static.akamaized.net/meta/images/lol/item/${lista.item0}.png?image=q_auto,f_webp,w_64&v=1693294894548`" :width="tamanho" alt="Primeiro item" :height="tamanho" class="item">
-                <img v-if="lista.item1" :src="`https://opgg-static.akamaized.net/meta/images/lol/item/${lista.item1}.png?image=q_auto,f_webp,w_64&v=1693294894548`" :width="tamanho" alt="Primeiro item" :height="tamanho" class="item">
-                <img v-if="lista.item2" :src="`https://opgg-static.akamaized.net/meta/images/lol/item/${lista.item2}.png?image=q_auto,f_webp,w_64&v=1693294894548`" :width="tamanho" alt="Primeiro item" :height="tamanho" class="item">
-                <img v-if="lista.item3" :src="`https://opgg-static.akamaized.net/meta/images/lol/item/${lista.item3}.png?image=q_auto,f_webp,w_64&v=1693294894548`" :width="tamanho" alt="Primeiro item" :height="tamanho" class="item">
-                <img v-if="lista.item4" :src="`https://opgg-static.akamaized.net/meta/images/lol/item/${lista.item4}.png?image=q_auto,f_webp,w_64&v=1693294894548`" :width="tamanho" alt="Primeiro item" :height="tamanho" class="item">
-                <img v-if="lista.item5" :src="`https://opgg-static.akamaized.net/meta/images/lol/item/${lista.item5}.png?image=q_auto,f_webp,w_64&v=1693294894548`" :width="tamanho" alt="Primeiro item" :height="tamanho" class="item">
-              </div>
-            </td>
-          </tr>
+              </td>
+            </tr>
+          </template>
         </tbody>
       </table>
     </div>
@@ -80,22 +112,27 @@
 </template>
 
 <script setup>
-import { computed, onMounted, onUpdated } from 'vue'
+import { ref, computed, onMounted, createApp } from 'vue'
 import { useHistoricoStore } from "@/stores/Historico";
 import { useRoute } from "vue-router";
+import UltimasPartidas from "@/components/UltimasPartidas.vue";
 
 const route = useRoute();
 const historico = useHistoricoStore();
 const champ = route.params.champ;
-const tamanhos = 60;
+let visible = ref({});
 
 const tamanho = computed(() => (window.innerWidth < 768) ? 25 : 60);
 const tamanhoMenos = computed(() => (window.innerWidth < 768) ? 4 : 12);
 const sm = computed(() => (window.innerWidth < 768) ? true : false);
 const innerWidth = computed(() => window.innerWidth);
+const versao = computed(() => historico.versao.n.champion);
+
+const app = createApp({});
+app.component('UltimasPartidas', UltimasPartidas);
+// app.data({visible: {}});
 
 onMounted(() => {
   historico.summoners(champ);
-  console.log(process.env.NODE_ENV);
-})
+});
 </script>

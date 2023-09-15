@@ -1,0 +1,92 @@
+<template>
+  <div class="spinner-border" role="status" v-if="carregando">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <table class="table align-middle table-borderless table-dark table-hover" v-else>
+    <tbody class="tbody-listagem">
+      <template v-for="partida in partidas" :key="`partidas-${partida.id}`">
+        <tr :class="`trPartidas tr-${status(partida)}`">
+          <td>
+            <div class="text-color">
+              <img :src="champStore.roles[partida.myData.position].img" :width="tamanho/2" :height="tamanho/2">
+            </div>
+          </td>
+          <td>
+            <div class="text-color">
+              <img :src="partida.myData.tier_info.tier_image_url" :width="tamanho" :height="tamanho" class="icone">
+              <span class="pdl">: {{partida.myData.tier_info.lp}}</span>
+            </div>
+          </td>
+          <td class="d-none-sm text-color">
+            <div>
+              <span class="text-info">{{ partida.myData.stats.kill }}</span>
+              <span> / </span>
+              <span class="text-danger">{{ partida.myData.stats.death }}</span>
+              <span> / </span>
+              <span class="text-warning">{{ partida.myData.stats.assist }}</span>
+            </div>
+          </td>
+          <td>
+            <div class="runas text-color">
+                <img :src="`https://opgg-static.akamaized.net/meta/images/lol/perkStyle/${partida.myData.rune.primary_page_id}.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="(tamanho/2)-3" :height="(tamanho/2)-3">
+                <img :src="`https://opgg-static.akamaized.net/meta/images/lol/perkStyle/${partida.myData.rune.secondary_page_id}.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="(tamanho/2)-3" :height="(tamanho/2)-3">
+            </div>
+          </td>
+          <td>
+            <div class="icones">
+              <template v-for="(item, index) in partida.myData.items" :key="index">
+                <img v-if="item != 0" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${item}.png`" :width="tamanho" :height="tamanho" class="item">
+              </template>
+            </div>
+          </td>
+        </tr>
+      </template>
+    </tbody>
+  </table>
+</template>
+
+<script setup>
+import { ref, computed, defineProps, onMounted } from 'vue';
+import { useHistoricoStore } from "@/stores/Historico";
+import { useCampeoesStore } from "@/stores/Campeoes";
+
+const historico = useHistoricoStore();
+const champStore = useCampeoesStore();
+
+const props = defineProps({
+  summoner_id: {
+    required: true,
+    type: String
+  },
+  internal_name: {
+    required: true,
+    type: String
+  },
+  campeaoId: {
+    required: true,
+    type: String
+  }
+});
+
+let partidas = ref([]);
+const tamanho = computed(() => (window.innerWidth < 768) ? 25 : 60);
+const sm = computed(() => (window.innerWidth < 768) ? true : false);
+const carregando = computed(() => (partidas.value.length > 0) ? false : true);
+const versao = computed(() => historico.versao.n.champion);
+
+const status = (partida) => {
+  if (partida.is_remake) return 'cinza';
+  if (partida.is_recorded) return 'cinza';
+
+  switch (partida.myData.stats.result) {
+    case 'LOSE': return 'vermelha';
+    case 'WIN': return 'azul';
+    default: return 'cinza';
+  }
+};
+
+onMounted(async () => {
+  partidas.value = await historico.historico(props.summoner_id, props.internal_name, props.campeaoId, true);
+});
+</script>
+  

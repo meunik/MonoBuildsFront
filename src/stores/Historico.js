@@ -43,6 +43,7 @@ export const useHistoricoStore = defineStore('Historico', {
 
     async summoners(champ) {
       this.listaItens = {};
+      await this.versaoLol();
       await this.buscaCamepoes();
       await this.buscaItensCompletos();
       
@@ -51,6 +52,8 @@ export const useHistoricoStore = defineStore('Historico', {
       const monos = games.data.data;
 
       monos.forEach(async mono => await this.listando(mono));
+
+      console.log(JSON.parse(JSON.stringify(this.listaItens)));
     },
     async listando(player) {
       const stat = player.most_champion_stat;
@@ -61,6 +64,7 @@ export const useHistoricoStore = defineStore('Historico', {
 
       this.listaItens[summoner.internal_name] = {
         id: summoner.id,
+        summoner_id: summoner.summoner_id,
         internal_name: summoner.internal_name,
         name: summoner.name,
         campeaoNameId: campeao.id,
@@ -75,11 +79,18 @@ export const useHistoricoStore = defineStore('Historico', {
       };
       await this.historico(summoner.summoner_id, summoner.internal_name, stat.id);
     },
-    async historico(summonerId, key, champId) {
+    async historico(summonerId, key, champId, html = false) {
+      if (html) this.carregando = true;
       const url = `https://op.gg/api/v1.0/internal/bypass/games/br/summoners/${summonerId}?&limit=20&hl=pt_BR&game_type=soloranked&champion=${champId}`;
       const games = await axios.get(url);
       const jogos = games.data.data;
 
+      if (html) {
+        console.log(JSON.parse(JSON.stringify(jogos)));
+        this.carregando = false;
+        return jogos;
+      }
+      
       if (jogos.length > 0) {
 
         await this.itens(jogos, key);

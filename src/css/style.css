@@ -157,6 +157,14 @@ body {
 .icone, .item {
   border-radius: 10px;
 }
+.btnVerMais {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 0px;
+  background: transparent;
+  border: none;
+}
 
 .routeBtn {
   border-radius: 8px;
@@ -191,6 +199,14 @@ body {
   flex-direction: column;
 }
 
+.runas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
 
 .divMonoNome {
   padding: 5px;
@@ -208,6 +224,35 @@ body {
   margin-top: 2px;
   height: 16px;
 }
+
+.pdl {
+  font-size: 12px;
+}
+
+.trPartidas {
+  border-radius: 10px;
+}
+
+/* .tr-vermelha {
+  background: #202a3e50;
+}
+.tr-azul {
+  background: #472a2f50;
+}
+.tr-cinza {
+  background: #212425;
+} */
+
+
+tbody>tr:hover.noHover {
+  background-color: none;
+  --bs-table-hover-bg: transparent;
+}
+
+/* .table > :not(caption) > *:hover.noHover > * {
+  background-color: none;
+  --bs-table-hover-bg: transparent;
+} */
 
 
 @media (max-width: 768px) {
@@ -249,5 +294,11 @@ body {
   }
   .routeBtn {
     padding: 5px 15px;
+  }
+  .btnVerMais {
+    width: 15px;
+  }
+  .table>:not(caption)>*>* {
+    padding: 3px 8px;
   }
 }

@@ -7,38 +7,38 @@ export const useCampeoesStore = defineStore('Campeoes', {
     filtroCampeoes: '',
     laneChamps: {},
     campeoes: {},
-    roles: [
-      {
+    roles: {
+      TODOS: {
         key: "TODOS",
         name: "TODOS",
         img: "https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-unselected.png",
       },
-      {
+      TOP: {
         key: "TOP",
         name: "TOP",
         img: "https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-top.png",
       },
-      {
+      JUNGLE: {
         key: "JUNGLE",
         name: "JUNGLE",
         img: "https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-jungle.png",
       },
-      {
+      MID: {
         key: "MIDDLE",
         name: "MID",
         img: "https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-middle.png",
       },
-      {
+      ADC: {
         key: "BOTTOM",
         name: "ADC",
         img: "https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-bottom.png",
       },
-      {
+      SUPPORT: {
         key: "SUPPORT",
         name: "SUP",
         img: "https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-utility.png",
       },
-    ],
+    },
     roleSelect: "TODOS",
   }),
 
