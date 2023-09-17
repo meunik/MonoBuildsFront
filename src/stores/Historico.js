@@ -262,6 +262,53 @@ export const useHistoricoStore = defineStore('Historico', {
 
       return jogosAtualizados;
     },
+    
+    async ajustesInfo(jogos, mais) {
+      let porLines = {
+        BLUE:{
+          TOP: {},
+          JUNGLE: {},
+          MID: {},
+          ADC: {},
+          SUPPORT: {},
+        },
+        RED:{
+          TOP: {},
+          JUNGLE: {},
+          MID: {},
+          ADC: {},
+          SUPPORT: {},
+        },
+      };
+
+      const jogosAtualizados = await Promise.all(jogos.map(async (jogo) => {
+        const tempo = moment(jogo.created_at).fromNow(true);
+    
+        let campeaoKey = Object.keys(this.campeoes).find(item => this.campeoes[item].key == jogo.champion_id);
+    
+        let ajustado = {
+          ...jogo,
+          spells: {
+            d: this.spells[jogo.spells[0]],
+            f: this.spells[jogo.spells[1]]
+          },
+          btnMaisHistorico: true,
+          champ: this.campeoes[campeaoKey].id,
+          tempo: tempo
+        };
+
+        porLines[jogo.team_key][jogo.position] = ajustado;
+        return ajustado;
+      }));
+    
+      console.log(porLines);
+      console.log(jogosAtualizados);
+      if (mais) this.carregandoMaisHistorico = false;
+      else this.carregando = false;
+    
+      return porLines;
+      return jogosAtualizados;
+    },
   }
 })
 

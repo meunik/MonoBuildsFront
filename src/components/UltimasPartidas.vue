@@ -5,7 +5,10 @@
   <table class="table align-middle table-borderless table-dark table-hover" v-else>
     <tbody class="tbody-listagem">
       <template v-for="partida in partidas" :key="`partidas-${partida.id}`">
-        <tr :class="`trPartidas tr-${status(partida)}`">
+        <tr
+          :class="`trPartidas tr-${status(partida)}`"
+          @click="visible[partida.id] = !visible[partida.id]"
+        >
           <td>
             <div v-if="sm" class="matchupSm text-color">
               <img v-if="partida.matchup" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/champion/${partida.matchup.pro}.png`" :width="(tamanho/2)" :height="(tamanho/2)" class="icone">
@@ -39,14 +42,14 @@
           </td>
           <td>
             <div class="runas text-color">
-                <img :src="`https://opgg-static.akamaized.net/meta/images/lol/perk/${partida.myData.rune.primary_rune_id}.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="(tamanho/2)-3" :height="(tamanho/2)-3">
-                <img :src="`https://opgg-static.akamaized.net/meta/images/lol/perkStyle/${partida.myData.rune.secondary_page_id}.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="(tamanho/2)-3" :height="(tamanho/2)-3">
+              <img :src="`https://opgg-static.akamaized.net/meta/images/lol/perk/${partida.myData.rune.primary_rune_id}.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="(tamanho/2)-3" :height="(tamanho/2)-3">
+              <img :src="`https://opgg-static.akamaized.net/meta/images/lol/perkStyle/${partida.myData.rune.secondary_page_id}.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="(tamanho/2)-3" :height="(tamanho/2)-3">
             </div>
           </td>
           <td>
             <div class="runas text-color">
-                <img :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${partida.spells.d}.png`" :width="(tamanho/2)-3" :height="(tamanho/2)-3" class="spells">
-                <img :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${partida.spells.f}.png`" :width="(tamanho/2)-3" :height="(tamanho/2)-3" class="spells">
+              <img :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${partida.spells.d}.png`" :width="(tamanho/2)-3" :height="(tamanho/2)-3" class="spells">
+              <img :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${partida.spells.f}.png`" :width="(tamanho/2)-3" :height="(tamanho/2)-3" class="spells">
             </div>
           </td>
           <td>
@@ -62,6 +65,13 @@
               <img v-if="partida.myData.trinket_item" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${partida.myData.trinket_item}.png`" :width="tamanho/2" :height="tamanho/2" class="trinket">
               <div v-else class="semItem trinket" :style="`width: ${tamanho/2}px; height: ${tamanho/2}px;`"></div>
               <span class="text-sm">{{ partida.tempo }} <span class="d-none-sm">atrás</span></span>
+            </div>
+          </td>
+        </tr>
+        <tr class="noHover">
+          <td colspan="8" class="tdPadding-sm p-0">
+            <div v-if="visible[partida.id]">
+              <Partida :partida="partida"/>
             </div>
           </td>
         </tr>
@@ -88,10 +98,14 @@
 </template>
 
 <script setup>
-import { ref, computed, defineProps, onMounted } from 'vue';
+import { ref, computed, defineProps, onMounted, createApp } from 'vue';
 import { useHistoricoStore } from "@/stores/Historico";
 import { useCampeoesStore } from "@/stores/Campeoes";
+import Partida from "@/components/Partida.vue";
 import moment from 'moment';
+
+const app = createApp({});
+app.component('Partida', Partida);
 
 const historico = useHistoricoStore();
 const champStore = useCampeoesStore();
@@ -111,6 +125,7 @@ const props = defineProps({
   }
 });
 
+let visible = ref({});
 let partidas = ref([]);
 let btnMaisHistorico = ref(true);
 const tamanho = computed(() => (window.innerWidth < 768) ? 25 : 60);
@@ -144,6 +159,7 @@ const status = (partida) => {
 
 onMounted(async () => {
   partidas.value = await historico.historico(props.summoner_id, props.internal_name, props.campeaoId, true);
+  console.log(JSON.parse(JSON.stringify(partidas.value)));
 });
 </script>
   
