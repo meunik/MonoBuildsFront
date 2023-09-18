@@ -5,26 +5,52 @@
   <div v-else>
     <div class="d-flex flex-column gap-1 gap-lg-2 m-4">
       <span class="d-flex font-bold">Itens</span>
-      <div class="d-flex gap-2 flex-wrap">
-        <div v-for="(build, index) in eventos.build" :key="`itensTimes${index}`" class="itensTimes d-flex gap-2 m-1">
-          <template v-for="(item, index) in build" :key="`itensOrdem${index}`">
-            <img v-if="item != 0" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${item}.png`" :width="tamanhoSkill" :height="tamanhoSkill" class="trinket">
-            <div v-else class="semItem trinket" :style="`width: ${tamanhoSkill}px; height: ${tamanhoSkill}px;`"></div>
-          </template>
+      <div class="d-flex gap-1 flex-wrap">
+        <div v-for="(build, index) in eventos.build" :key="`itensTimes${index}`">
+          <div class="d-flex">
+            <span class="text-color">{{ Math.floor((index/60000)-1) }} min</span>
+          </div>
+          <div class="itensTimes d-flex justify-content-center align-items-center gap-2 m-1">
+            <template v-for="(item, index) in build" :key="`itensOrdem${index}`">
+              <img v-if="item != 0" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${item}.png`" :width="tamanhoItens" :height="tamanhoItens" class="trinket">
+              <div v-else class="semItem trinket" :style="`width: ${tamanhoItens}px; height: ${tamanhoItens}px;`"></div>
+            </template>
+          </div>
         </div>
       </div>
     </div>
     <div class="d-flex flex-column gap-2 gap-lg-3 m-4">
       <span class="d-flex font-bold">Habilidades</span>
-      <div class="d-flex gap-2">
-        <div v-for="(skill, index) in eventos.skils" :key="`habilidades${index}`" class="d-flex flex-column gap-1 gap-lg-2">
-          <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}Q.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" :class="`opacitySkill ${(skilsLetra(skill) == 'Q')?'skillAtiva':''}`">
-          <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}W.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" :class="`opacitySkill ${(skilsLetra(skill) == 'W')?'skillAtiva':''}`">
-          <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}E.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" :class="`opacitySkill ${(skilsLetra(skill) == 'E')?'skillAtiva':''}`">
-          <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}R.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" :class="`opacitySkill ${(skilsLetra(skill) == 'R')?'skillAtiva':''}`">
+      <div class="colunaHabilidades">
+
+        <div class="linhaHabilidades justify-content-end">
+          <div class="semItem trinket" :style="`width: ${tamanhoSkill+1}px; height: ${tamanhoSkill+1}px;`"><b>Q </b></div>
+          <div class="semItem trinket" :style="`width: ${tamanhoSkill+1}px; height: ${tamanhoSkill+1}px;`"><b>W </b></div>
+          <div class="semItem trinket" :style="`width: ${tamanhoSkill+1}px; height: ${tamanhoSkill+1}px;`"><b>E </b></div>
+          <div class="semItem trinket" :style="`width: ${tamanhoSkill+1}px; height: ${tamanhoSkill+1}px;`"><b>R </b></div>
+        </div>
+
+        <div v-for="(skill, index) in eventos.skils" :key="`habilidades${index}`" class="linhaHabilidades">
+          <div class="quadradinhoHabilidades">
+            <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}Q.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" :class="`opacitySkill ${(skilsLetra(skill) == 'Q')?'skillAtiva':''}`">
+            <span class="letraHabilidades">Q</span>
+          </div>
+          <div class="quadradinhoHabilidades">
+            <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}W.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" :class="`opacitySkill ${(skilsLetra(skill) == 'W')?'skillAtiva':''}`">
+            <span class="letraHabilidades">W</span>
+          </div>
+          <div class="quadradinhoHabilidades">
+            <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}E.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" :class="`opacitySkill ${(skilsLetra(skill) == 'E')?'skillAtiva':''}`">
+            <span class="letraHabilidades">E</span>
+          </div>
+          <div class="quadradinhoHabilidades">
+            <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}R.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" :class="`opacitySkill ${(skilsLetra(skill) == 'R')?'skillAtiva':''}`">
+            <span class="letraHabilidades">R</span>
+          </div>
         </div>
       </div>
     </div>
+    <span class="d-flex font-bold my-2">Visão Geral</span>
     <table class="table align-middle table-borderless table-dark table-hover">
       <template v-for="(item, index) in teams" :key="index">
         <thead class="thead-listagem">
@@ -77,6 +103,7 @@ const props = defineProps({
 let eventos = ref([]);
 let players = ref([]);
 let teams = ref([]);
+const tamanhoItens = computed(() => (window.innerWidth < 768) ? 20 : 60);
 const tamanhoSkill = computed(() => (window.innerWidth < 768) ? 15 : 25);
 const tamanho = computed(() => (window.innerWidth < 768) ? 25 : 60);
 const sm = computed(() => (window.innerWidth < 768) ? true : false);

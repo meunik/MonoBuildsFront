@@ -6,7 +6,7 @@
       </router-link>
     </div>
 
-    <div class="table-responsive">
+    <div class="table-responsive container">
       <table class="table align-middle table-borderless table-dark table-hover">
         <thead class="thead-listagem">
           <tr>

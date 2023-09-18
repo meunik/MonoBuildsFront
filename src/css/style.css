@@ -342,7 +342,7 @@ tbody>tr:hover.noHover {
 .skillAtiva {
   opacity: 1 !important;
   border-radius: 5px;
-  border: 1px solid #ffffff98 !important;
+  border: 1px solid #ffffffbe !important;
 }
 .opacitySkill {
   opacity: 0.3;
@@ -353,6 +353,28 @@ tbody>tr:hover.noHover {
   border-radius: 5px;
   border: 1px solid #472a2f;
   padding: 2px;
+}
+
+.colunaHabilidades {
+  display: flex;
+  gap: 2px;
+}
+.linhaHabilidades {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.quadradinhoHabilidades {
+  position: relative !important;
+}
+.letraHabilidades {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  color: #fff;
+  font-weight: bold;
 }
 
 
