@@ -18,10 +18,10 @@
       <span class="d-flex font-bold">Habilidades</span>
       <div class="d-flex gap-2">
         <div v-for="(skill, index) in eventos.skils" :key="`habilidades${index}`" class="d-flex flex-column gap-1 gap-lg-2">
-          <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/AatroxQ.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" :class="`opacitySkill ${(skilsLetra(skill) == 'Q')?'skillAtiva':''}`">
-          <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/AatroxW.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" :class="`opacitySkill ${(skilsLetra(skill) == 'W')?'skillAtiva':''}`">
-          <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/AatroxE.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" :class="`opacitySkill ${(skilsLetra(skill) == 'E')?'skillAtiva':''}`">
-          <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/AatroxR.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" :class="`opacitySkill ${(skilsLetra(skill) == 'R')?'skillAtiva':''}`">
+          <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}Q.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" :class="`opacitySkill ${(skilsLetra(skill) == 'Q')?'skillAtiva':''}`">
+          <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}W.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" :class="`opacitySkill ${(skilsLetra(skill) == 'W')?'skillAtiva':''}`">
+          <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}E.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" :class="`opacitySkill ${(skilsLetra(skill) == 'E')?'skillAtiva':''}`">
+          <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}R.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" :class="`opacitySkill ${(skilsLetra(skill) == 'R')?'skillAtiva':''}`">
         </div>
       </div>
     </div>
@@ -77,7 +77,7 @@ const props = defineProps({
 let eventos = ref([]);
 let players = ref([]);
 let teams = ref([]);
-const tamanhoSkill = computed(() => (window.innerWidth < 768) ? 15 : 15);
+const tamanhoSkill = computed(() => (window.innerWidth < 768) ? 15 : 25);
 const tamanho = computed(() => (window.innerWidth < 768) ? 25 : 60);
 const sm = computed(() => (window.innerWidth < 768) ? true : false);
 const versao = computed(() => historico.versao.n.champion);
