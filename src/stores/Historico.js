@@ -11,6 +11,7 @@ export const useHistoricoStore = defineStore('Historico', {
     limitHistorico: 10,
     carregandoMais: false,
     carregandoMaisHistorico: false,
+    carregandoHistoricoSkills: false,
     btnMais: true,
     btnMaisHistorico: true,
     campeoes: {},
@@ -256,13 +257,8 @@ export const useHistoricoStore = defineStore('Historico', {
         };
       }));
 
-      // console.log(jogosAtualizados);
-      if (mais) this.carregandoMaisHistorico = false;
-      else this.carregando = false;
-
       return jogosAtualizados;
     },
-    
     async ajustesInfo(jogos, mais) {
       let porLines = {
         BLUE:{
@@ -301,13 +297,37 @@ export const useHistoricoStore = defineStore('Historico', {
         return ajustado;
       }));
     
-      console.log(porLines);
-      console.log(jogosAtualizados);
-      if (mais) this.carregandoMaisHistorico = false;
-      else this.carregando = false;
-    
       return porLines;
-      return jogosAtualizados;
+    },
+    
+    async buscaEventos(champId, createdAt, participanteId) {
+      this.carregandoHistoricoSkills = true;
+      const data = encodeURIComponent(createdAt);
+      const response = await axios.get(`https://op.gg/api/v1.0/internal/bypass/games/br/analysis/${champId}=?created_at=${data}`);
+      const events = response.data.data;
+      const frames = events.timeline.frames;
+      let skils = [];
+      let build = {};
+
+      await frames.forEach(async frame => {
+        const tempo = frame.timestamp;
+        build = { ...build, [tempo]: [] };
+
+        await frame.events.forEach(event => {
+          if (event.participant_id == participanteId) {
+            if (event.type == "ITEM_PURCHASED") build[tempo].push(event.item_id);
+            if (event.type == "SKILL_LEVEL_UP") skils.push(event.skill_slot);
+          }
+        });
+      });
+
+      Object.keys(build).forEach(key => { if (build[key].length == 0) delete build[key]; });
+
+      // console.log(skils);
+      // console.log(build);
+
+      this.carregandoHistoricoSkills = false;
+      return { skils: skils, build: build };
     },
   }
 })

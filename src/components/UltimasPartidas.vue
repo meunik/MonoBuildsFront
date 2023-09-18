@@ -70,8 +70,9 @@
         </tr>
         <tr class="noHover">
           <td colspan="8" class="tdPadding-sm p-0">
-            <div v-if="visible[partida.id]">
+            <div v-if="visible[partida.id]" class="px-lg-3">
               <Partida :partida="partida"/>
+              <hr>
             </div>
           </td>
         </tr>

@@ -149,6 +149,12 @@ body {
   margin-top: 6px;
   margin-left: 6px;
 }
+.iconesCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
 .icones {
   display: flex;
   align-items: center;
@@ -241,6 +247,14 @@ body {
   font-size: 12px;
   line-height: 12px;
 }
+.th-sm {
+  font-size: 12px;
+  line-height: 12px;
+}
+.tds-sm>td {
+  padding-left: 2px !important;
+  padding-right: 2px !important;
+}
 
 
 .divMonoNome {
@@ -282,6 +296,15 @@ body {
   border-left: 4px solid #414141;
 }
 
+.red {
+  background: #472a2f50;
+  /* border-left: 4px solid #472a2f; */
+}
+.blue {
+  background: #202a3e50;
+  /* border-left: 4px solid #202a3e; */
+}
+
 
 tbody>tr:hover.noHover {
   background-color: none;
@@ -292,6 +315,45 @@ tbody>tr:hover.noHover {
   background-color: none;
   --bs-table-hover-bg: transparent;
 } */
+
+.progressBarr {
+  /* width: 40px; */
+  height: 5px;
+  border-radius: 0px;
+  background: #333;
+}
+
+.skillQ {
+  background: #1a242ce6;
+  color: #33a9ff !important;
+}
+.skillW {
+  background: #1a242ce6;
+  color: #ff8f1a !important;
+}
+.skillE {
+  background: #1a242ce6;
+  color: #36ffda !important;
+}
+.skillR {
+  background: #1a242ce6;
+  color: #fff !important;
+}
+.skillAtiva {
+  opacity: 1 !important;
+  border-radius: 5px;
+  border: 1px solid #ffffff98 !important;
+}
+.opacitySkill {
+  opacity: 0.3;
+  border-radius: 5px;
+  border: 1px solid #000;
+}
+.itensTimes {
+  border-radius: 5px;
+  border: 1px solid #472a2f;
+  padding: 2px;
+}
 
 
 @media (max-width: 768px) {
