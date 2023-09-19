@@ -25,7 +25,7 @@
               <img :src="champStore.roles[partida.myData.position].img" :width="tamanho/1.8" :height="tamanho/1.8">
             </div>
           </td>
-          <td class="">
+          <td class="d-none-sm">
             <div class="text-color">
               <img :src="partida.myData.tier_info.tier_image_url" :width="tamanho" :height="tamanho" class="icone">
               <span class="pdl">: {{partida.myData.tier_info.lp}}</span>

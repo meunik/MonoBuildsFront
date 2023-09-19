@@ -22,42 +22,37 @@
     <div class="d-flex flex-column gap-2 gap-lg-3 m-1 m-lg-4">
       <span class="d-flex font-bold">Habilidades</span>
       <div class="colunaHabilidades flex-wrap">
-
         <div class="linhaHabilidades">
           <div class="quadradinhoHabilidades">
-            <div class="semItem trinket" :style="`width: ${tamanhoSkill}px; height: ${tamanhoSkill}px;`"></div>
-            <span class="letraHabilidades">Q:</span>
+            <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}Q.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" class="mostraSkill">
           </div>
           <div class="quadradinhoHabilidades">
-            <div class="semItem trinket" :style="`width: ${tamanhoSkill}px; height: ${tamanhoSkill}px;`"></div>
-            <span class="letraHabilidades">W:</span>
+            <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}W.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" class="mostraSkill">
           </div>
           <div class="quadradinhoHabilidades">
-            <div class="semItem trinket" :style="`width: ${tamanhoSkill}px; height: ${tamanhoSkill}px;`"></div>
-            <span class="letraHabilidades">E:</span>
+            <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}E.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" class="mostraSkill">
           </div>
           <div class="quadradinhoHabilidades">
-            <div class="semItem trinket" :style="`width: ${tamanhoSkill}px; height: ${tamanhoSkill}px;`"></div>
-            <span class="letraHabilidades">R:</span>
+            <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}R.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" class="mostraSkill">
           </div>
         </div>
 
         <div v-for="(skill, index) in eventos.skils" :key="`habilidades${index}`" class="linhaHabilidades">
           <div class="quadradinhoHabilidades">
-            <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}Q.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" :class="`opacitySkill ${(skilsLetra(skill) == 'Q')?'skillAtiva':''}`">
-            <span class="letraHabilidades">Q</span>
+            <div :class="`semItem trinket opacitySkill ${(skilsLetra(skill) == 'Q')?'skillAtiva':''}`" :style="`width: ${tamanhoSkill}px; height: ${tamanhoSkill}px;`"></div>
+            <span :class="`letraHabilidades ${(skilsLetra(skill) == 'Q')?'skillAtiva':''}`">Q</span>
           </div>
           <div class="quadradinhoHabilidades">
-            <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}W.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" :class="`opacitySkill ${(skilsLetra(skill) == 'W')?'skillAtiva':''}`">
-            <span class="letraHabilidades">W</span>
+            <div  :class="`semItem trinket opacitySkill ${(skilsLetra(skill) == 'W')?'skillAtiva':''}`" :style="`width: ${tamanhoSkill}px; height: ${tamanhoSkill}px;`"></div>
+            <span :class="`letraHabilidades ${(skilsLetra(skill) == 'W')?'skillAtiva':''}`">W</span>
           </div>
           <div class="quadradinhoHabilidades">
-            <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}E.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" :class="`opacitySkill ${(skilsLetra(skill) == 'E')?'skillAtiva':''}`">
-            <span class="letraHabilidades">E</span>
+            <div  :class="`semItem trinket opacitySkill ${(skilsLetra(skill) == 'E')?'skillAtiva':''}`" :style="`width: ${tamanhoSkill}px; height: ${tamanhoSkill}px;`"></div>
+            <span :class="`letraHabilidades ${(skilsLetra(skill) == 'E')?'skillAtiva':''}`">E</span>
           </div>
           <div class="quadradinhoHabilidades">
-            <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}R.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" :class="`opacitySkill ${(skilsLetra(skill) == 'R')?'skillAtiva':''}`">
-            <span class="letraHabilidades">R</span>
+            <div  :class="`semItem trinket opacitySkill ${(skilsLetra(skill) == 'R')?'skillAtiva':''}`" :style="`width: ${tamanhoSkill}px; height: ${tamanhoSkill}px;`"></div>
+            <span :class="`letraHabilidades ${(skilsLetra(skill) == 'R')?'skillAtiva':''}`">R</span>
           </div>
         </div>
       </div>

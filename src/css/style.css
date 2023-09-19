@@ -345,13 +345,14 @@ tbody>tr:hover.noHover {
 }
 .skillAtiva {
   opacity: 1 !important;
-  border-radius: 5px;
   border: 1px solid #ffffffbe !important;
+  color: #fff !important;
 }
 .opacitySkill {
   opacity: 0.3;
   border-radius: 5px;
   border: 1px solid #000;
+  color: #000;
 }
 .itensTimes {
   border-radius: 5px;
@@ -378,7 +379,7 @@ tbody>tr:hover.noHover {
   right: 0;
   top: 0;
   bottom: 0;
-  color: #fff;
+  color: #414141;
   font-weight: bold;
 }
 
