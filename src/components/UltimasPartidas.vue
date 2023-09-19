@@ -11,8 +11,8 @@
         >
           <td>
             <div v-if="sm" class="matchupSm text-color">
-              <img v-if="partida.matchup" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/champion/${partida.matchup.pro}.png`" :width="(tamanho/2)" :height="(tamanho/2)" class="icone">
-              <img v-if="partida.matchup" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/champion/${partida.matchup.contra}.png`" :width="(tamanho/2)" :height="(tamanho/2)" class="icone">
+              <img v-if="partida.matchup" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/champion/${partida.matchup.pro}.png`" :width="(tamanho/1.8)" :height="(tamanho/1.8)" class="icone">
+              <img v-if="partida.matchup" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/champion/${partida.matchup.contra}.png`" :width="(tamanho/1.8)" :height="(tamanho/1.8)" class="icone">
             </div>
             <div v-else class="icones">
               <img v-if="partida.matchup" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/champion/${partida.matchup.pro}.png`" :width="tamanho" :height="tamanho" class="icone">
@@ -22,10 +22,10 @@
           </td>
           <td>
             <div class="text-color">
-              <img :src="champStore.roles[partida.myData.position].img" :width="tamanho/2" :height="tamanho/2">
+              <img :src="champStore.roles[partida.myData.position].img" :width="tamanho/1.8" :height="tamanho/1.8">
             </div>
           </td>
-          <td class="d-none-sm">
+          <td class="">
             <div class="text-color">
               <img :src="partida.myData.tier_info.tier_image_url" :width="tamanho" :height="tamanho" class="icone">
               <span class="pdl">: {{partida.myData.tier_info.lp}}</span>
@@ -42,14 +42,14 @@
           </td>
           <td>
             <div class="runas text-color">
-              <img :src="`https://opgg-static.akamaized.net/meta/images/lol/perk/${partida.myData.rune.primary_rune_id}.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="(tamanho/2)-3" :height="(tamanho/2)-3">
-              <img :src="`https://opgg-static.akamaized.net/meta/images/lol/perkStyle/${partida.myData.rune.secondary_page_id}.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="(tamanho/2)-3" :height="(tamanho/2)-3">
+              <img :src="`https://opgg-static.akamaized.net/meta/images/lol/perk/${partida.myData.rune.primary_rune_id}.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="(tamanho/2)" :height="(tamanho/2)">
+              <img :src="`https://opgg-static.akamaized.net/meta/images/lol/perkStyle/${partida.myData.rune.secondary_page_id}.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="(tamanho/2)" :height="(tamanho/2)">
             </div>
           </td>
           <td>
             <div class="runas text-color">
-              <img :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${partida.spells.d}.png`" :width="(tamanho/2)-3" :height="(tamanho/2)-3" class="spells">
-              <img :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${partida.spells.f}.png`" :width="(tamanho/2)-3" :height="(tamanho/2)-3" class="spells">
+              <img :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${partida.spells.d}.png`" :width="(tamanho/2)" :height="(tamanho/2)" class="spells">
+              <img :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${partida.spells.f}.png`" :width="(tamanho/2)" :height="(tamanho/2)" class="spells">
             </div>
           </td>
           <td>
@@ -64,7 +64,7 @@
             <div class="tempoTrinket text-color">
               <img v-if="partida.myData.trinket_item" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${partida.myData.trinket_item}.png`" :width="tamanho/2" :height="tamanho/2" class="trinket">
               <div v-else class="semItem trinket" :style="`width: ${tamanho/2}px; height: ${tamanho/2}px;`"></div>
-              <span class="text-sm">{{ partida.tempo }} <span class="d-none-sm">atrás</span></span>
+              <span class="text-sm text-sm">{{ partida.tempo }} <span class="d-none-sm">atrás</span></span>
             </div>
           </td>
         </tr>
@@ -129,7 +129,7 @@ const props = defineProps({
 let visible = ref({});
 let partidas = ref([]);
 let btnMaisHistorico = ref(true);
-const tamanho = computed(() => (window.innerWidth < 768) ? 25 : 60);
+const tamanho = computed(() => (window.innerWidth < 768) ? 20 : 60);
 const sm = computed(() => (window.innerWidth < 768) ? true : false);
 const carregando = computed(() => (partidas.value.length > 0) ? false : true);
 const versao = computed(() => historico.versao.n.champion);

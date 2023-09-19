@@ -170,6 +170,10 @@ body {
 .icone, .item {
   border-radius: 10px;
 }
+/* .item {
+  width: 60px;
+  height: 60px;
+} */
 .spells, .trinket {
   border-radius: 6px;
 }
@@ -366,6 +370,7 @@ tbody>tr:hover.noHover {
 }
 .quadradinhoHabilidades {
   position: relative !important;
+  display: flex;
 }
 .letraHabilidades {
   position: absolute;
@@ -384,6 +389,7 @@ tbody>tr:hover.noHover {
   }
   body {
     font-size: 10px;
+    padding: 5px;
   }
   .nome {
     font-size: 10px;
@@ -392,7 +398,7 @@ tbody>tr:hover.noHover {
     gap: 2px;
   }
   .icone, .item {
-    border-radius: 5px;
+    border-radius: 2px;
   }
   .amaDiv {
     font-size: 9px;
@@ -432,5 +438,22 @@ tbody>tr:hover.noHover {
   }
   .text-sm {
     font-size: 9px;
+  }
+  .letraHabilidades {
+    font-size: 6px;
+  }
+  .opacitySkill {
+    border-radius: 1px;
+  }
+  .letraHabilidades{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .text-sm-sm {
+    font-size: 9px;
+  }
+  .iconesCenter {
+    gap: 2px;
   }
 }

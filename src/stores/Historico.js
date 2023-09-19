@@ -91,6 +91,7 @@ export const useHistoricoStore = defineStore('Historico', {
       const games = await axios.get(url);
       const jogos = games.data.data;
 
+      this.carregandoMaisHistorico = false;
       return await this.matchup(jogos, true);
     },
 

@@ -6,7 +6,7 @@
       </router-link>
     </div>
 
-    <div class="table-responsive container">
+    <div class="container">
       <table class="table align-middle table-borderless table-dark table-hover">
         <thead class="thead-listagem">
           <tr>
@@ -150,7 +150,7 @@ const historico = useHistoricoStore();
 const champ = route.params.champ;
 let visible = ref({});
 
-const tamanho = computed(() => (window.innerWidth < 768) ? 25 : 60);
+const tamanho = computed(() => (window.innerWidth < 768) ? 20 : 60);
 const tamanhoMenos = computed(() => (window.innerWidth < 768) ? 4 : 12);
 const sm = computed(() => (window.innerWidth < 768) ? true : false);
 const innerWidth = computed(() => window.innerWidth);

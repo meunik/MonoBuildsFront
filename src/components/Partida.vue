@@ -3,14 +3,14 @@
     <span class="visually-hidden">Loading...</span>
   </div>
   <div v-else>
-    <div class="d-flex flex-column gap-1 gap-lg-2 m-4">
+    <div class="d-flex flex-column gap-1 gap-lg-2 m-1 m-lg-4">
       <span class="d-flex font-bold">Itens</span>
       <div class="d-flex gap-1 flex-wrap">
         <div v-for="(build, index) in eventos.build" :key="`itensTimes${index}`">
           <div class="d-flex">
             <span class="text-color">{{ Math.floor((index/60000)-1) }} min</span>
           </div>
-          <div class="itensTimes d-flex justify-content-center align-items-center gap-2 m-1">
+          <div class="itensTimes d-flex justify-content-center align-items-center gap-1 gap-lg-2 m-1">
             <template v-for="(item, index) in build" :key="`itensOrdem${index}`">
               <img v-if="item != 0" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${item}.png`" :width="tamanhoItens" :height="tamanhoItens" class="trinket">
               <div v-else class="semItem trinket" :style="`width: ${tamanhoItens}px; height: ${tamanhoItens}px;`"></div>
@@ -19,15 +19,27 @@
         </div>
       </div>
     </div>
-    <div class="d-flex flex-column gap-2 gap-lg-3 m-4">
+    <div class="d-flex flex-column gap-2 gap-lg-3 m-1 m-lg-4">
       <span class="d-flex font-bold">Habilidades</span>
-      <div class="colunaHabilidades">
+      <div class="colunaHabilidades flex-wrap">
 
-        <div class="linhaHabilidades justify-content-end">
-          <div class="semItem trinket" :style="`width: ${tamanhoSkill+1}px; height: ${tamanhoSkill+1}px;`"><b>Q </b></div>
-          <div class="semItem trinket" :style="`width: ${tamanhoSkill+1}px; height: ${tamanhoSkill+1}px;`"><b>W </b></div>
-          <div class="semItem trinket" :style="`width: ${tamanhoSkill+1}px; height: ${tamanhoSkill+1}px;`"><b>E </b></div>
-          <div class="semItem trinket" :style="`width: ${tamanhoSkill+1}px; height: ${tamanhoSkill+1}px;`"><b>R </b></div>
+        <div class="linhaHabilidades">
+          <div class="quadradinhoHabilidades">
+            <div class="semItem trinket" :style="`width: ${tamanhoSkill}px; height: ${tamanhoSkill}px;`"></div>
+            <span class="letraHabilidades">Q:</span>
+          </div>
+          <div class="quadradinhoHabilidades">
+            <div class="semItem trinket" :style="`width: ${tamanhoSkill}px; height: ${tamanhoSkill}px;`"></div>
+            <span class="letraHabilidades">W:</span>
+          </div>
+          <div class="quadradinhoHabilidades">
+            <div class="semItem trinket" :style="`width: ${tamanhoSkill}px; height: ${tamanhoSkill}px;`"></div>
+            <span class="letraHabilidades">E:</span>
+          </div>
+          <div class="quadradinhoHabilidades">
+            <div class="semItem trinket" :style="`width: ${tamanhoSkill}px; height: ${tamanhoSkill}px;`"></div>
+            <span class="letraHabilidades">R:</span>
+          </div>
         </div>
 
         <div v-for="(skill, index) in eventos.skils" :key="`habilidades${index}`" class="linhaHabilidades">
@@ -56,17 +68,17 @@
         <thead class="thead-listagem">
           <tr>
             <th scope="col" class="text-color th-sm">
-              <span :class="`${item.key == 'BLUE' ? 'text-info' : 'text-danger'}`">
+              <span :class="`${item.key == 'BLUE' ? 'text-info' : 'text-danger'} text-sm-sm`">
                 {{ item.game_stat.is_win ? 'Vitória' : 'Derrota' }} 
               </span>
               <span class="d-none-sm"> ({{ item.key == 'BLUE' ? 'Time Azul' : 'Time Vermelho' }})</span>
             </th>
             <th scope="col" class="text-color th-sm d-none-sm">Rota</th>
             <th scope="col" class="text-color th-sm d-none-sm">Elo</th>
-            <th scope="col" class="text-color th-sm">Frag</th>
-            <th scope="col" class="text-color th-sm">CS</th>
-            <th scope="col" class="text-color th-sm">D/T</th>
-            <th scope="col" class="text-color th-sm">Itens</th>
+            <th scope="col" class="text-color th-sm text-sm-sm">Frag</th>
+            <th scope="col" class="text-color th-sm text-sm-sm">CS</th>
+            <th scope="col" class="text-color th-sm text-sm-sm">D/T</th>
+            <th scope="col" class="text-color th-sm text-sm-sm">Itens</th>
           </tr>
         </thead>
         <tbody class="tbody-listagem" :class="item.key.toLowerCase()">
@@ -103,9 +115,9 @@ const props = defineProps({
 let eventos = ref([]);
 let players = ref([]);
 let teams = ref([]);
-const tamanhoItens = computed(() => (window.innerWidth < 768) ? 20 : 60);
-const tamanhoSkill = computed(() => (window.innerWidth < 768) ? 15 : 25);
-const tamanho = computed(() => (window.innerWidth < 768) ? 25 : 60);
+const tamanhoItens = computed(() => (window.innerWidth < 768) ? 15 : 60);
+const tamanhoSkill = computed(() => (window.innerWidth < 768) ? 10 : 25);
+const tamanho = computed(() => (window.innerWidth < 768) ? 15 : 60);
 const sm = computed(() => (window.innerWidth < 768) ? true : false);
 const versao = computed(() => historico.versao.n.champion);
 const carregando = computed(() => historico.carregandoHistoricoSkills);
