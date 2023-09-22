@@ -4,6 +4,7 @@ import moment from 'moment';
 
 export const useHistoricoStore = defineStore('Historico', {
   state: () => ({
+    url: '',
     versao: {},
     listaItens: {},
     lista: [],
@@ -15,6 +16,10 @@ export const useHistoricoStore = defineStore('Historico', {
     btnMais: true,
     btnMaisHistorico: true,
     campeoes: {},
+    campeao: {},
+    runasUrlBase: 'https://ddragon.canisback.com/img/',
+    runasPags: {},
+    runas: {},
     itensRiot: {},
     todosItens: [
       1001, 1004, 1006, 1011, 1018, 1026, 1027, 1028, 1029, 1031, 1033, 1036, 1037, 1038, 1042, 1043, 1052, 1053, 1057, 1058, 2003, 6695, 6662, 2015, 2031, 6609, 6664, 6694, 2065, 2138, 2139, 2140, 6676, 6675, 2420, 2421, 6677, 6656, 6660, 3001, 3003, 3006, 3009, 3011, 3020, 3024, 3031, 3033, 3035, 3036, 6655, 6632, 6653, 3044, 3046, 3047, 3050, 3051, 3053, 3057, 3065, 3066, 3067, 3068, 3070, 3071, 3072, 3074, 3075, 3076, 3077, 3078, 3082, 3083, 3085, 3086, 3089, 3091, 3094, 3095, 3100, 3102, 3105, 3107, 3108, 3109, 3110, 3111, 3113, 3114, 3115, 3116, 3117, 3123, 3124, 3133, 3134, 3135, 3139, 3140, 3142, 3143, 3145, 3152, 3153, 3155, 3156, 3157, 3158, 3165, 3179, 6333, 3190, 3191, 3193, 6693, 3211, 3222, 6630, 6631, 6692, 3504, 3508, 6671, 6670, 6691, 3742, 3748, 3801, 3802, 3814, 3004, 6673, 6672, 3916, 4005, 4401, 4628, 4629, 4630, 4632, 4633, 4635, 4636, 4637, 4642, 6029, 6035, 6616, 6617, 1516, 1517, 1518, 1519, 8001, 6696, 3119, 3121, 8020, 4644, 4645, 6665, 3161, 6667, 3803, 6657, 3084, 3087, 3023, 3012, 6620, 2019, 
@@ -29,42 +34,94 @@ export const useHistoricoStore = defineStore('Historico', {
     itensMiticos: [
       2065, 6617, 6620, 3001, 3190, 6667, 4644, 6656, 6657, 6662, 6691, 3156, 6692, 6653, 6655, 4636, 3152, 4633, 3124, 6630, 6665, 3084, 6631, 6632, 3078, 6671, 6675, 3031, 3142
     ],
-    spells: {
-      1: 'SummonerBoost',
-      3: 'SummonerExhaust',
-      4: 'SummonerFlash',
-      6: 'SummonerHaste',
-      7: 'SummonerHeal',
-      11: 'SummonerSmite',
-      12: 'SummonerTeleport',
-      14: 'SummonerDot',
-      21: 'SummonerBarrier',
-    }
+    itensRiot: {},
+    spells: {},
   }),
+
+  // https://ddragon.leagueoflegends.com/cdn/13.18.1/data/pt_BR/runesReforged.json
+  // https://ddragon.canisback.com/img/perk-images/Styles/7200_Domination.png
 
   actions: {
     async versaoLol() {
       const response = await axios.get('https://ddragon.leagueoflegends.com/realms/br.json');
       const data = response.data;
       this.versao = data;
-      return data;
+      const url = `https://ddragon.leagueoflegends.com/cdn/${this.versao.n.champion}/data/pt_BR`;
+      this.url = url;
+      return url;
+    },
+    async urlVersao() {
+      return (Object.keys(this.versao).length == 0) ? await this.versaoLol() : this.url;
     },
     async buscaCamepoes() {
-      await this.versaoLol();
-      const response = await axios.get(`https://ddragon.leagueoflegends.com/cdn/${this.versao.n.champion}/data/pt_BR/champion.json`);
+      const url = await this.urlVersao();
+      const response = await axios.get(`${url}/champion.json`);
       const data = response.data;
       this.campeoes = data.data;
       return data.data;
     },
+    async buscaCampeao(champ) {
+      const url = await this.urlVersao();
+      const response = await axios.get(`${url}/champion/${champ}.json`);
+      const data = response.data;
+      const campeaoObj = data.data[champ];
+      this.campeao = campeaoObj;
+      // console.log(JSON.parse(JSON.stringify(campeaoObj)));
+    },
+    async buscaRunas() {
+      const url = await this.urlVersao();
+      const response = await axios.get(`${url}/runesReforged.json`);
+      const data = response.data;
+      let runasPagsObj = {};
+      let runasObj = {};
+
+      for (const runas of data) {
+        runasPagsObj[runas.id] = runas;
+        for (const slot of runas.slots) {
+          let runaObj = {};
+          for (const runa of slot.runes) {
+            runaObj[runa.id] = runa;
+            runasObj[runa.id] = runa;
+          }
+          slot.runes = runaObj;
+        }
+      }
+      this.runasPags = runasPagsObj;
+      this.runas = runasObj;
+      // console.log(JSON.parse(JSON.stringify(runasPagsObj)));
+      // console.log(JSON.parse(JSON.stringify(runasObj)));
+    },
     async buscaItensCompletos() {
       this.itensCompletos = this.todosItens.filter(item => !this.itensNaoCompletos.includes(item));
+    },
+    async buscaSpells() {
+      const url = await this.urlVersao();
+      const response = await axios.get(`${url}/summoner.json`);
+      const data = response.data;
+      const spellObj = data.data;
+
+      Object.keys(spellObj).forEach(key => {
+        this.spells = {
+          ...this.spells,
+          [spellObj[key].key]: spellObj[key]
+        }
+      });
+      // console.log(JSON.parse(JSON.stringify(this.spells)));
+    },
+    async buscaItens() {
+      const url = await this.urlVersao();
+      const response = await axios.get(`${url}/item.json`);
+      const data = response.data;
+      const itensObj = data.data;
+      this.itensRiot = itensObj;
+      // console.log(JSON.parse(JSON.stringify(itensObj)));
     },
 
     async maisSummoners(champ) {
       this.carregandoMais = true;
 
       try {
-        await this.versaoLol();
+        if (Object.keys(this.versao).length == 0) await this.versaoLol();
         await this.buscaCamepoes();
         await this.buscaItensCompletos();
   
@@ -101,7 +158,11 @@ export const useHistoricoStore = defineStore('Historico', {
       this.listaItens = {};
       await this.versaoLol();
       await this.buscaCamepoes();
+      await this.buscaCampeao(champ);
+      await this.buscaRunas();
       await this.buscaItensCompletos();
+      await this.buscaSpells();
+      await this.buscaItens();
       
       const url = `https://op.gg/api/v1.0/internal/bypass/rankings/br/champions/${champ}?&hl=pt_BR&limit=${this.limit}`;
       const games = await axios.get(url);

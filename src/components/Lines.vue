@@ -6,12 +6,40 @@
           <img v-if="line.champ" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/champion/${line.champ}.png`" :width="tamanho" :height="tamanho" class="icone">
         </div>
         <div class="runas text-color">
-          <img :src="`https://opgg-static.akamaized.net/meta/images/lol/perk/${line.rune.primary_rune_id}.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="(tamanho/2)" :height="(tamanho/2)">
-          <img :src="`https://opgg-static.akamaized.net/meta/images/lol/perkStyle/${line.rune.secondary_page_id}.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="(tamanho/2)" :height="(tamanho/2)">
+          <img
+            v-hover="{
+              component: TooltipRunas,
+              props: { id: line.rune.primary_rune_id, runas: runas }
+            }"
+            :src="`${runasUrlBase}${runas[line.rune.primary_rune_id].icon}`"
+            :width="(tamanho/2)"
+            :height="(tamanho/2)"
+          >
+          <img
+            v-hover="{
+              component: TooltipRunas,
+              props: { id: line.rune.secondary_page_id, runas: runasPags }
+            }"
+            :src="`${runasUrlBase}${runasPags[line.rune.secondary_page_id].icon}`"
+            :width="(tamanho/2)"
+            :height="(tamanho/2)"
+          >
         </div>
         <div class="runas text-color">
-          <img :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${line.spells.d}.png`" :width="(tamanho/2)" :height="(tamanho/2)" class="spells">
-          <img :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${line.spells.f}.png`" :width="(tamanho/2)" :height="(tamanho/2)" class="spells">
+          <img
+            v-hover="{ component: TooltipSpells, props: { spell: line.spells.d } }"
+            :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${line.spells.d.id}.png`"
+            :width="(tamanho/2)"
+            :height="(tamanho/2)"
+            class="spells"
+          >
+          <img
+            v-hover="{ component: TooltipSpells, props: { spell: line.spells.f } }"
+            :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${line.spells.f.id}.png`"
+            :width="(tamanho/2)"
+            :height="(tamanho/2)"
+            class="spells"
+          >
         </div>
       </div>
     </td>
@@ -58,10 +86,24 @@
     <td>
       <div class="iconesCenter">
         <template v-for="(item, index) in line.items" :key="index">
-          <img v-if="item != 0" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${item}.png`" :width="tamanho" :height="tamanho" class="item">
+          <img
+            v-if="item != 0"
+            v-hover="{ component: TooltipItens, props: { itemId: item } }"
+            :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${item}.png`"
+            :width="tamanho"
+            :height="tamanho"
+            class="item"
+          >
           <div v-else class="semItem item" :style="`width: ${tamanho}px; height: ${tamanho}px;`"></div>
         </template>
-        <img v-if="line.trinket_item" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${line.trinket_item}.png`" :width="tamanho/1.5" :height="tamanho/1.5" class="trinket">
+        <img
+          v-if="line.trinket_item"
+          v-hover="{ component: TooltipItens, props: { itemId: line.trinket_item } }"
+          :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${line.trinket_item}.png`"
+          :width="tamanho/1.5"
+          :height="tamanho/1.5"
+          class="trinket"
+        >
         <div v-else class="semItem trinket" :style="`width: ${tamanho/1.5}px; height: ${tamanho/1.5}px;`"></div>
       </div>
     </td>
@@ -72,6 +114,9 @@
 import { ref, computed, defineProps, onMounted, proxyRefs } from 'vue';
 import { useHistoricoStore } from "@/stores/Historico";
 import { useCampeoesStore } from "@/stores/Campeoes";
+import TooltipItens from "@/directives/TooltipItens.vue";
+import TooltipSpells from "@/directives/TooltipSpells.vue";
+import TooltipRunas from "@/directives/TooltipRunas.vue";
 import moment from 'moment';
 
 const historico = useHistoricoStore();
@@ -85,6 +130,10 @@ const props = defineProps({
     required: true,
   }
 });
+
+const runas = computed(() => historico.runas);
+const runasPags = computed(() => historico.runasPags);
+const runasUrlBase = computed(() => historico.runasUrlBase);
 
 const tamanhoBarr = computed(() => (window.innerWidth < 768) ? 25 : 40);
 const tamanho = computed(() => (window.innerWidth < 768) ? 15 : 60);

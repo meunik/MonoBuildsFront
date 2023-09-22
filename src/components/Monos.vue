@@ -6,7 +6,7 @@
       </router-link>
     </div>
 
-    <div class="container">
+    <div>
       <table class="table align-middle table-borderless table-dark table-hover">
         <thead class="thead-listagem">
           <tr>
@@ -64,22 +64,64 @@
               </td>
               <td>
                 <div class="icones">
-                  <img v-if="lista.item0" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item0}.png`" :width="tamanho" :height="tamanho" class="item">
+                  <img
+                    v-if="lista.item0"
+                    v-hover="{ component: TooltipItens, props: { itemId: lista.item0 } }"
+                    :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item0}.png`"
+                    :width="tamanho"
+                    :height="tamanho"
+                    class="item"
+                  >
                   <div v-else class="semItem item" :style="`width: ${tamanho}px; height: ${tamanho}px;`"></div>
 
-                  <img v-if="lista.item1" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item1}.png`" :width="tamanho" :height="tamanho" class="item">
+                  <img
+                    v-if="lista.item1"
+                    v-hover="{ component: TooltipItens, props: { itemId: lista.item1 } }"
+                    :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item1}.png`"
+                    :width="tamanho"
+                    :height="tamanho"
+                    class="item"
+                  >
                   <div v-else class="semItem item" :style="`width: ${tamanho}px; height: ${tamanho}px;`"></div>
 
-                  <img v-if="lista.item2" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item2}.png`" :width="tamanho" :height="tamanho" class="item">
+                  <img
+                    v-if="lista.item2"
+                    v-hover="{ component: TooltipItens, props: { itemId: lista.item2 } }"
+                    :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item2}.png`"
+                    :width="tamanho"
+                    :height="tamanho"
+                    class="item"
+                  >
                   <div v-else class="semItem item" :style="`width: ${tamanho}px; height: ${tamanho}px;`"></div>
 
-                  <img v-if="lista.item3" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item3}.png`" :width="tamanho" :height="tamanho" class="item">
+                  <img
+                    v-if="lista.item3"
+                    v-hover="{ component: TooltipItens, props: { itemId: lista.item3 } }"
+                    :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item3}.png`"
+                    :width="tamanho"
+                    :height="tamanho"
+                    class="item"
+                  >
                   <div v-else class="semItem item" :style="`width: ${tamanho}px; height: ${tamanho}px;`"></div>
 
-                  <img v-if="lista.item4" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item4}.png`" :width="tamanho" :height="tamanho" class="item">
+                  <img
+                    v-if="lista.item4"
+                    v-hover="{ component: TooltipItens, props: { itemId: lista.item4 } }"
+                    :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item4}.png`"
+                    :width="tamanho"
+                    :height="tamanho"
+                    class="item"
+                  >
                   <div v-else class="semItem item" :style="`width: ${tamanho}px; height: ${tamanho}px;`"></div>
 
-                  <img v-if="lista.item5" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item5}.png`" :width="tamanho" :height="tamanho" class="item">
+                  <img
+                    v-if="lista.item5"
+                    v-hover="{ component: TooltipItens, props: { itemId: lista.item5 } }"
+                    :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${lista.item5}.png`"
+                    :width="tamanho"
+                    :height="tamanho"
+                    class="item"
+                  >
                   <div v-else class="semItem item" :style="`width: ${tamanho}px; height: ${tamanho}px;`"></div>
                 </div>
               </td>
@@ -144,6 +186,7 @@ import { ref, computed, onMounted, createApp } from 'vue'
 import { useHistoricoStore } from "@/stores/Historico";
 import { useRoute } from "vue-router";
 import UltimasPartidas from "@/components/UltimasPartidas.vue";
+import TooltipItens from "@/directives/TooltipItens.vue";
 
 const route = useRoute();
 const historico = useHistoricoStore();
@@ -159,6 +202,19 @@ const versao = computed(() => historico.versao.n.champion);
 const app = createApp({});
 app.component('UltimasPartidas', UltimasPartidas);
 // app.data({visible: {}});
+
+// const vHover = {
+//   mounted: (el, binding) => {
+//     const app = createApp(binding.value);
+//     const hoverComponentInstance = app.mount(document.createElement('div'));
+//     el.addEventListener("mouseenter", () => {
+//       document.body.appendChild(hoverComponentInstance.$el);
+//     });
+//     el.addEventListener("mouseleave", () => {
+//       document.body.removeChild(hoverComponentInstance.$el);
+//     });
+//   }
+// }
 
 onMounted(() => {
   historico.summoners(champ);

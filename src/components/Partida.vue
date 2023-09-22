@@ -12,7 +12,14 @@
           </div>
           <div class="itensTimes d-flex justify-content-center align-items-center gap-1 gap-lg-2 m-1">
             <template v-for="(item, index) in build" :key="`itensOrdem${index}`">
-              <img v-if="item != 0" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${item}.png`" :width="tamanhoItens" :height="tamanhoItens" class="trinket">
+              <img
+                v-if="item != 0"
+                v-hover="{ component: TooltipItens, props: { itemId: item } }"
+                :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${item}.png`"
+                :width="tamanhoItens"
+                :height="tamanhoItens"
+                class="trinket"
+              >
               <div v-else class="semItem trinket" :style="`width: ${tamanhoItens}px; height: ${tamanhoItens}px;`"></div>
             </template>
           </div>
@@ -23,17 +30,65 @@
       <span class="d-flex font-bold">Habilidades</span>
       <div class="colunaHabilidades flex-wrap">
         <div class="linhaHabilidades">
-          <div class="quadradinhoHabilidades">
-            <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}Q.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" class="mostraSkill">
+          <div class="d-flex">
+            <img
+              v-hover="{
+                component: TooltipHabilidades,
+                props: {
+                  skillName: `${partida.matchup.pro}Q`,
+                  skill: 0
+                }
+              }"
+              :src="`https://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${partida.matchup.pro}Q.png`"
+              :width="tamanhoSkill"
+              :height="tamanhoSkill"
+              class="mostraSkill"
+            >
           </div>
-          <div class="quadradinhoHabilidades">
-            <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}W.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" class="mostraSkill">
+          <div class="d-flex">
+            <img
+              v-hover="{
+                component: TooltipHabilidades,
+                props: {
+                  skillName: `${partida.matchup.pro}W`,
+                  skill: 1
+                }
+              }"
+              :src="`https://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${partida.matchup.pro}W.png`"
+              :width="tamanhoSkill"
+              :height="tamanhoSkill"
+              class="mostraSkill"
+            >
           </div>
-          <div class="quadradinhoHabilidades">
-            <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}E.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" class="mostraSkill">
+          <div class="d-flex">
+            <img
+              v-hover="{
+                component: TooltipHabilidades,
+                props: {
+                  skillName: `${partida.matchup.pro}E`,
+                  skill: 2
+                }
+              }"
+              :src="`https://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${partida.matchup.pro}E.png`"
+              :width="tamanhoSkill"
+              :height="tamanhoSkill"
+              class="mostraSkill"
+            >
           </div>
-          <div class="quadradinhoHabilidades">
-            <img :src="`https://opgg-static.akamaized.net/meta/images/lol/spell/${partida.matchup.pro}R.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="tamanhoSkill" :height="tamanhoSkill" class="mostraSkill">
+          <div class="d-flex">
+            <img
+              v-hover="{
+                component: TooltipHabilidades,
+                props: {
+                  skillName: `${partida.matchup.pro}R`,
+                  skill: 3
+                }
+              }"
+              :src="`https://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${partida.matchup.pro}R.png`"
+              :width="tamanhoSkill"
+              :height="tamanhoSkill"
+              class="mostraSkill"
+            >
           </div>
         </div>
 
@@ -93,6 +148,8 @@ import { ref, computed, defineProps, onMounted, createApp } from 'vue';
 import { useHistoricoStore } from "@/stores/Historico";
 import { useCampeoesStore } from "@/stores/Campeoes";
 import Lines from "@/components/Lines.vue";
+import TooltipItens from "@/directives/TooltipItens.vue";
+import TooltipHabilidades from "@/directives/TooltipHabilidades.vue";
 import moment from 'moment';
 
 const app = createApp({});

@@ -42,27 +42,69 @@
           </td>
           <td>
             <div class="runas text-color">
-              <img :src="`https://opgg-static.akamaized.net/meta/images/lol/perk/${partida.myData.rune.primary_rune_id}.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="(tamanho/2)" :height="(tamanho/2)">
-              <img :src="`https://opgg-static.akamaized.net/meta/images/lol/perkStyle/${partida.myData.rune.secondary_page_id}.png?image=q_auto,f_webp,w_64&v=1694664078578`" :width="(tamanho/2)" :height="(tamanho/2)">
+              <img
+                v-hover="{
+                  component: TooltipRunas,
+                  props: { id: partida.myData.rune.primary_rune_id, runas: runas }
+                }"
+                :src="`${runasUrlBase}${runas[partida.myData.rune.primary_rune_id].icon}`"
+                :width="(tamanho/2)"
+                :height="(tamanho/2)"
+              >
+              <img
+                v-hover="{
+                  component: TooltipRunas,
+                  props: { id: partida.myData.rune.secondary_page_id, runas: runasPags }
+                }"
+                :src="`${runasUrlBase}${runasPags[partida.myData.rune.secondary_page_id].icon}`"
+                :width="(tamanho/2)"
+                :height="(tamanho/2)"
+              >
             </div>
           </td>
           <td>
             <div class="runas text-color">
-              <img :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${partida.spells.d}.png`" :width="(tamanho/2)" :height="(tamanho/2)" class="spells">
-              <img :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${partida.spells.f}.png`" :width="(tamanho/2)" :height="(tamanho/2)" class="spells">
+              <img
+                v-hover="{ component: TooltipSpells, props: { spell: partida.spells.d } }"
+                :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${partida.spells.d.id}.png`"
+                :width="(tamanho/2)"
+                :height="(tamanho/2)"
+                class="spells"
+              >
+              <img
+                v-hover="{ component: TooltipSpells, props: { spell: partida.spells.f } }"
+                :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/spell/${partida.spells.f.id}.png`"
+                :width="(tamanho/2)"
+                :height="(tamanho/2)"
+                class="spells"
+              >
             </div>
           </td>
           <td>
             <div class="icones">
               <template v-for="(item, index) in partida.myData.items" :key="index">
-                <img v-if="item != 0" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${item}.png`" :width="tamanho" :height="tamanho" class="item">
+                <img
+                  v-if="item != 0"
+                  v-hover="{ component: TooltipItens, props: { itemId: item } }"
+                  :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${item}.png`"
+                  :width="tamanho"
+                  :height="tamanho"
+                  class="item"
+                >
                 <div v-else class="semItem item" :style="`width: ${tamanho}px; height: ${tamanho}px;`"></div>
               </template>
             </div>
           </td>
           <td>
             <div class="tempoTrinket text-color">
-              <img v-if="partida.myData.trinket_item" :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${partida.myData.trinket_item}.png`" :width="tamanho/2" :height="tamanho/2" class="trinket">
+              <img
+                v-if="partida.myData.trinket_item"
+                v-hover="{ component: TooltipItens, props: { itemId: partida.myData.trinket_item } }"
+                :src="`http://ddragon.leagueoflegends.com/cdn/${versao}/img/item/${partida.myData.trinket_item}.png`"
+                :width="tamanho/2"
+                :height="tamanho/2"
+                class="trinket"
+              >
               <div v-else class="semItem trinket" :style="`width: ${tamanho/2}px; height: ${tamanho/2}px;`"></div>
               <span class="text-sm text-sm">{{ partida.tempo }} <span class="d-none-sm">atrás</span></span>
             </div>
@@ -103,6 +145,9 @@ import { ref, computed, defineProps, onMounted, createApp } from 'vue';
 import { useHistoricoStore } from "@/stores/Historico";
 import { useCampeoesStore } from "@/stores/Campeoes";
 import Partida from "@/components/Partida.vue";
+import TooltipSpells from "@/directives/TooltipSpells.vue";
+import TooltipItens from "@/directives/TooltipItens.vue";
+import TooltipRunas from "@/directives/TooltipRunas.vue";
 import moment from 'moment';
 
 const app = createApp({});
@@ -133,6 +178,9 @@ const tamanho = computed(() => (window.innerWidth < 768) ? 20 : 60);
 const sm = computed(() => (window.innerWidth < 768) ? true : false);
 const carregando = computed(() => (partidas.value.length > 0) ? false : true);
 const versao = computed(() => historico.versao.n.champion);
+const runas = computed(() => historico.runas);
+const runasPags = computed(() => historico.runasPags);
+const runasUrlBase = computed(() => historico.runasUrlBase);
 
 const buscarMaisPartidas = async (matchs) => {
   const dataUltimaPartida = matchs[matchs.length-1].created_at;
