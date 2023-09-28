@@ -58,6 +58,7 @@ button.selected:focus-visible {
   /* max-width: 1280px;
   margin: 0 auto; */
   text-align: center;
+  width: 100%;
 }
 
 @media (prefers-color-scheme: light) {
@@ -91,6 +92,17 @@ body {
   background-color: transparent;
 }
 
+.divLogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.logo {
+  font-size: 25px;
+  font-weight: 600;
+}
+
 .text-color {
   color: #bdbdbd !important;
 }
@@ -105,6 +117,83 @@ body {
   background: transparent !important;
 }
 
+
+
+input {
+  background: transparent;
+  color: #d8b776;
+  border: 1px solid #24b2ba50;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+/* input:focus, input:focus-visible {
+  border: 1px solid #d8b7769c;
+  outline: none;
+} */
+input:focus, input:focus-visible {
+  /* color: #bdbdbd; */
+  border: 1px solid #888888;
+  outline: none;
+}
+.containerChamp {
+  max-width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.containerLine {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.divlines {
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.linesBtn {
+  padding: 5px;
+  border-radius: 0px;
+}
+.primeiro {
+  border-radius: 8px 0px 0px 8px;
+}
+.ultimo {
+  border-radius: 0px 8px 8px 0px;
+}
+
+.imgChamp {
+  border: 0;
+  vertical-align: middle;
+  max-width: 100%;
+}
+.divChamp {
+  padding: 5px;
+  position: relative;
+  display: block;
+  color: #d8b776;
+}
+.divChamp:hover {
+  color: #24b2ba;
+}
+.spanChamp {
+  display: block;
+  width: 46px;
+  line-height: 14px;
+  font-size: 12px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+  height: 16px;
+}
 
 .read-the-docs {
   color: #888;
@@ -198,7 +287,7 @@ body {
   background-color: #1a1a1a9a;
   cursor: pointer;
   transition: border-color 0.25s;
-  margin-bottom: 30px;
+  border: 1px solid transparent;
 }
 .routeBtn:hover {
   border: 1px solid #d8b7769c;
@@ -206,7 +295,8 @@ body {
 }
 .routeBtn:focus,
 .routeBtn:focus-visible {
-  outline: 4px auto #000000;
+  outline: none;
+  border: 1px solid #d8b7769c;
 }
 
 .amaDiv {
@@ -484,5 +574,9 @@ maintext > li {
   }
   .iconesCenter {
     gap: 2px;
+  }
+  .input-sm {
+    padding: 5px 5px;
+    width: 100px;
   }
 }

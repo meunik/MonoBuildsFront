@@ -1,10 +1,11 @@
 <template>
   <div class="monoContainer">
-    <div class="mb-32">
+    <!-- <div class="mb-32">
+      <input type="text" class="filtroCampeoes mr-20">
       <router-link :to="`/campeoes`" class="routeBtn">
         Campeoes
       </router-link>
-    </div>
+    </div> -->
 
     <div>
       <table class="table align-middle table-borderless table-dark table-hover">
@@ -182,7 +183,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, createApp } from 'vue'
+import { ref, computed, onMounted, createApp } from 'vue';
 import { useHistoricoStore } from "@/stores/Historico";
 import { useRoute } from "vue-router";
 import UltimasPartidas from "@/components/UltimasPartidas.vue";

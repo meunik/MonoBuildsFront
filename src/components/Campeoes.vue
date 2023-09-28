@@ -1,23 +1,24 @@
 <template>
-  <div>
-    <input type="text" class="filtroCampeoes" v-model="champStore.filtroCampeoes">
-
-    <div class="containerLine">
-      <div v-for="(role, key) in champStore.roles" :key="key" class="divlines">
-        <button
-          @click="champStore.roleSelect = (champStore.roleSelect != role.key) ? role.key : 'TODOS'"
-          data-toggle="tooltip"
-          data-placement="top"
-          :title="role.name"
-          :class="{
-            linesBtn: 'linesBtn',
-            selected: (champStore.roleSelect == role.key)?'selected':'',
-            primeiro: (role.key == 'TODOS')?'primeiro':'',
-            ultimo: (role.key == 'SUPPORT')?'ultimo':''
-          }"
-        >
-          <img :src="role.img" alt="" :width="tamanhoLine" :height="tamanhoLine">
-        </button>
+  <div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="d-flex flex-column flex-md-row gap-md-3 justify-content-center align-items-center">
+      <input type="text" v-model="champStore.filtroCampeoes">
+      <div class="containerLine">
+        <div v-for="(role, key) in champStore.roles" :key="key" class="divlines">
+          <button
+            @click="champStore.roleSelect = (champStore.roleSelect != role.key) ? role.key : 'TODOS'"
+            data-toggle="tooltip"
+            data-placement="top"
+            :title="role.name"
+            :class="{
+              linesBtn: 'linesBtn',
+              selected: (champStore.roleSelect == role.key)?'selected':'',
+              primeiro: (role.key == 'TODOS')?'primeiro':'',
+              ultimo: (role.key == 'SUPPORT')?'ultimo':''
+            }"
+          >
+            <img :src="role.img" alt="" :width="tamanhoLine" :height="tamanhoLine">
+          </button>
+        </div>
       </div>
     </div>
 
@@ -70,75 +71,3 @@ onMounted(async () => {
   champStore.posicao();
 });
 </script>
-
-<style>
-input {
-  background: transparent;
-  color: #e8e6e3;
-  border: 1px solid #ffffff50;
-  padding: 5px 10px;
-  border-radius: 20px;
-}
-.filtroCampeoes {
-  margin-bottom: 10px;
-}
-.containerChamp {
-  max-width: 800px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-}
-.containerLine {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.divlines {
-  padding: 0px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.linesBtn {
-  padding: 5px;
-  border-radius: 0px;
-}
-.primeiro {
-  border-radius: 8px 0px 0px 8px;
-}
-.ultimo {
-  border-radius: 0px 8px 8px 0px;
-}
-
-.imgChamp {
-  border: 0;
-  vertical-align: middle;
-  max-width: 100%;
-}
-.divChamp {
-  padding: 5px;
-  position: relative;
-  display: block;
-  color: #d8b776;
-}
-.divChamp:hover {
-  color: #24b2ba;
-}
-.spanChamp {
-  display: block;
-  width: 46px;
-  line-height: 14px;
-  font-size: 12px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  margin-top: 2px;
-  height: 16px;
-}
-</style>
