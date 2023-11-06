@@ -103,3 +103,59 @@
 .text-nowrap {text-wrap: nowrap;}
 .white-space-nowrap {white-space: nowrap;}
 .font-bold {font-weight: bold;}
+
+
+
+.f-1 {font-size: 1px;}
+.f-2 {font-size: 2px;}
+.f-3 {font-size: 3px;}
+.f-4 {font-size: 4px;}
+.f-5 {font-size: 5px;}
+.f-6 {font-size: 6px;}
+.f-7 {font-size: 7px;}
+.f-8 {font-size: 8px;}
+.f-9 {font-size: 9px;}
+.f-10 {font-size: 10px;}
+.f-11 {font-size: 11px;}
+.f-12 {font-size: 12px;}
+.f-13 {font-size: 13px;}
+.f-14 {font-size: 14px;}
+.f-15 {font-size: 15px;}
+.f-16 {font-size: 16px;}
+.f-20 {font-size: 20px;}
+.f-24 {font-size: 24px;}
+.f-28 {font-size: 28px;}
+.f-32 {font-size: 32px;}
+.f-36 {font-size: 36px;}
+.f-40 {font-size: 40px;}
+.f-44 {font-size: 44px;}
+.f-48 {font-size: 48px;}
+
+
+
+@media (max-width: 768px) {
+  .f-sm-1 {font-size: 1px;}
+  .f-sm-2 {font-size: 2px;}
+  .f-sm-3 {font-size: 3px;}
+  .f-sm-4 {font-size: 4px;}
+  .f-sm-5 {font-size: 5px;}
+  .f-sm-6 {font-size: 6px;}
+  .f-sm-7 {font-size: 7px;}
+  .f-sm-8 {font-size: 8px;}
+  .f-sm-9 {font-size: 9px;}
+  .f-sm-10 {font-size: 10px;}
+  .f-sm-11 {font-size: 11px;}
+  .f-sm-12 {font-size: 12px;}
+  .f-sm-13 {font-size: 13px;}
+  .f-sm-14 {font-size: 14px;}
+  .f-sm-15 {font-size: 15px;}
+  .f-sm-16 {font-size: 16px;}
+  .f-sm-20 {font-size: 20px;}
+  .f-sm-24 {font-size: 24px;}
+  .f-sm-28 {font-size: 28px;}
+  .f-sm-32 {font-size: 32px;}
+  .f-sm-36 {font-size: 36px;}
+  .f-sm-40 {font-size: 40px;}
+  .f-sm-44 {font-size: 44px;}
+  .f-sm-48 {font-size: 48px;}
+}

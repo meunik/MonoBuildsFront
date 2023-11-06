@@ -47,8 +47,14 @@
               <td class="text-color tdPadding-sm">
                 <span class="text-nowrap">{{ lista.play }} <span class="d-none-sm">jogos</span></span>
               </td>
-              <td class="d-none-sm text-color">
-                <div class="amaDiv">
+              <td class="text-color">
+                <div v-if="sm" class="amaDiv">
+                  <div class="ama">
+                    <span class="f-sm-7">V:<span class="text-primary">{{ lista.win }}</span></span>
+                    <span class="f-sm-7">D:<span class="text-danger">{{ lista.lose }}</span></span>
+                  </div>
+                </div>
+                <div v-else class="amaDiv">
                   <div class="ama text-end">
                     <span>V</span>
                     <span class="text-primary">{{ lista.win }}</span>
@@ -202,20 +208,6 @@ const versao = computed(() => historico.versao.n.champion);
 
 const app = createApp({});
 app.component('UltimasPartidas', UltimasPartidas);
-// app.data({visible: {}});
-
-// const vHover = {
-//   mounted: (el, binding) => {
-//     const app = createApp(binding.value);
-//     const hoverComponentInstance = app.mount(document.createElement('div'));
-//     el.addEventListener("mouseenter", () => {
-//       document.body.appendChild(hoverComponentInstance.$el);
-//     });
-//     el.addEventListener("mouseleave", () => {
-//       document.body.removeChild(hoverComponentInstance.$el);
-//     });
-//   }
-// }
 
 onMounted(() => {
   historico.summoners(champ);

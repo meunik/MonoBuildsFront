@@ -208,6 +208,9 @@ input:focus, input:focus-visible {
 .nomeTd {
   text-align: start;
 }
+.nome-md {
+  font-size: 18px !important;
+}
 .nome {
   font-weight: 600;
   font-size: 23px;
@@ -493,6 +496,12 @@ div.skillAtiva {
   margin-top: 5px;
 }
 
+.nowrap {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 maintext, maintext>status {
   display: block;
   text-align: initial;
@@ -509,6 +518,9 @@ maintext > li {
   body {
     font-size: 10px;
     padding: 5px;
+  }
+  .nome-md {
+    font-size: 8px !important;
   }
   .nome {
     font-size: 10px;
@@ -528,6 +540,9 @@ maintext > li {
   .iconePlayer {
     margin-top: 2px;
     margin-left: 2px;
+  }
+  .max-w-sm-38 {
+    width: 38px !important;
   }
   .tresPontinhos-sm {
     display: block;

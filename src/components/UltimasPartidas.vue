@@ -22,13 +22,13 @@
           </td>
           <td>
             <div class="text-color">
-              <img :src="champStore.roles[partida.myData.position].img" :width="tamanho/1.8" :height="tamanho/1.8">
+              <img :src="champStore.roles[partida.myData.position].img" :width="(tamanho/1.8)+5" :height="(tamanho/1.8)+5">
             </div>
           </td>
-          <td class="d-none-sm">
-            <div class="text-color">
+          <td>
+            <div class="text-color nowrap">
               <img :src="partida.myData.tier_info.tier_image_url" :width="tamanho" :height="tamanho" class="icone">
-              <span class="pdl">: {{partida.myData.tier_info.lp}}</span>
+              <span class="pdl f-sm-7">: {{partida.myData.tier_info.lp}}</span>
             </div>
           </td>
           <td class="text-color">

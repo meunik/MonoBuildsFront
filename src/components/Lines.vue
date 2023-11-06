@@ -43,9 +43,18 @@
         </div>
       </div>
     </td>
+    <td class="nomeTd tdPadding-sm">
+      <a
+        :href="`https://www.op.gg/summoners/br/${line.summoner.name}`"
+        target="_blank"
+        class="nome nome-md tresPontinhos-sm max-w-sm-38"
+      >
+        {{ line.summoner.name }}
+      </a>
+    </td>
     <td class="">
       <div class="text-color">
-        <img :src="champStore.roles[line.position].img" :width="tamanho/2" :height="tamanho/2">
+        <img :src="champStore.roles[line.position].img" :width="(tamanho/2)+5" :height="(tamanho/2)+5">
       </div>
     </td>
     <td class="">

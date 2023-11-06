@@ -123,8 +123,9 @@
               </span>
               <span class="d-none-sm"> ({{ item.key == 'BLUE' ? 'Time Azul' : 'Time Vermelho' }})</span>
             </th>
-            <th scope="col" class="text-color th-sm d-none-sm">Rota</th>
-            <th scope="col" class="text-color th-sm d-none-sm">Elo</th>
+            <th scope="col" class="text-color th-sm text-sm-sm">{{sm?'':'Nick'}}</th>
+            <th scope="col" class="text-color th-sm text-sm-sm">{{sm?'':'Rota'}}</th>
+            <th scope="col" class="text-color th-sm text-sm-sm">Elo</th>
             <th scope="col" class="text-color th-sm text-sm-sm">Frag</th>
             <th scope="col" class="text-color th-sm text-sm-sm">CS</th>
             <th scope="col" class="text-color th-sm text-sm-sm">D/T</th>
@@ -173,7 +174,6 @@ const tamanho = computed(() => (window.innerWidth < 768) ? 15 : 60);
 const sm = computed(() => (window.innerWidth < 768) ? true : false);
 const versao = computed(() => historico.versao.n.champion);
 const carregando = computed(() => historico.carregandoHistoricoSkills);
-// const carregando = computed(() => (players.value.length > 0) ? false : true);
 
 const skilsLetra = (skill) => {
   switch (skill) {
