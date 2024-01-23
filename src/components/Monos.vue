@@ -38,20 +38,20 @@
                   target="_blank"
                   class="nome tresPontinhos-sm"
                 >
-                  {{ lista.name }}
+                  <span>{{ lista.name }}</span>
                 </a>
               </td>
               <td class="tdPadding-sm">
                 <img v-if="lista.soloQ" :src="lista.soloQ.tier_info.tier_image_url" :width="tamanho" :alt="lista.campeaoName" :height="tamanho" class="icone">
               </td>
               <td class="text-color tdPadding-sm">
-                <span class="text-nowrap">{{ lista.play }} <span class="d-none-sm">jogos</span></span>
+                <span class="text-nowrap">{{ lista.play }} <span class="d-none-md">jogos</span></span>
               </td>
               <td class="text-color">
                 <div v-if="sm" class="amaDiv">
                   <div class="ama">
-                    <span class="f-sm-7">V:<span class="text-primary">{{ lista.win }}</span></span>
-                    <span class="f-sm-7">D:<span class="text-danger">{{ lista.lose }}</span></span>
+                    <span class="f-sm-7"><span class="d-none-md">V:</span><span class="text-primary">{{ lista.win }}</span></span>
+                    <span class="f-sm-7"><span class="d-none-md">D:</span><span class="text-danger">{{ lista.lose }}</span></span>
                   </div>
                 </div>
                 <div v-else class="amaDiv">

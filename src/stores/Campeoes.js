@@ -43,6 +43,11 @@ export const useCampeoesStore = defineStore('Campeoes', {
   }),
 
   actions: {
+    async teste() {
+      const response = await axios.get('https://op.gg/api/v1.0/internal/bypass/summoners/br/vCYKfr70f1QT8kAlHcnwVsyCFztnZHh_2zbNWiGbbweW6w/most-champions/rank?game_type=RANKED&season_id=23');
+      const data = response.data;
+      return data;
+    },
     async versaoLol() {
       const response = await axios.get('https://ddragon.leagueoflegends.com/realms/br.json');
       const data = response.data;

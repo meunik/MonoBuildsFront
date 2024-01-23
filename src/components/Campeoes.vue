@@ -69,5 +69,6 @@ const campeoes = computed(() => {
 onMounted(async () => {
   await champStore.buscaCamepoes();
   champStore.posicao();
+  console.log(champStore.teste());
 });
 </script>

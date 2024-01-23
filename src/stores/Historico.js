@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import axios from 'axios';
 import moment from 'moment';
+import arquivoItensRiot from "@/Utils/itens.json";
 
 export const useHistoricoStore = defineStore('Historico', {
   state: () => ({
@@ -21,13 +22,14 @@ export const useHistoricoStore = defineStore('Historico', {
     runasPags: {},
     runas: {},
     itensRiot: {},
-    todosItens: [
-      1001, 1004, 1006, 1011, 1018, 1026, 1027, 1028, 1029, 1031, 1033, 1036, 1037, 1038, 1042, 1043, 1052, 1053, 1057, 1058, 2003, 6695, 6662, 2015, 2031, 6609, 6664, 6694, 2065, 2138, 2139, 2140, 6676, 6675, 2420, 2421, 6677, 6656, 6660, 3001, 3003, 3006, 3009, 3011, 3020, 3024, 3031, 3033, 3035, 3036, 6655, 6632, 6653, 3044, 3046, 3047, 3050, 3051, 3053, 3057, 3065, 3066, 3067, 3068, 3070, 3071, 3072, 3074, 3075, 3076, 3077, 3078, 3082, 3083, 3085, 3086, 3089, 3091, 3094, 3095, 3100, 3102, 3105, 3107, 3108, 3109, 3110, 3111, 3113, 3114, 3115, 3116, 3117, 3123, 3124, 3133, 3134, 3135, 3139, 3140, 3142, 3143, 3145, 3152, 3153, 3155, 3156, 3157, 3158, 3165, 3179, 6333, 3190, 3191, 3193, 6693, 3211, 3222, 6630, 6631, 6692, 3504, 3508, 6671, 6670, 6691, 3742, 3748, 3801, 3802, 3814, 3004, 6673, 6672, 3916, 4005, 4401, 4628, 4629, 4630, 4632, 4633, 4635, 4636, 4637, 4642, 6029, 6035, 6616, 6617, 1516, 1517, 1518, 1519, 8001, 6696, 3119, 3121, 8020, 4644, 4645, 6665, 3161, 6667, 3803, 6657, 3084, 3087, 3023, 3012, 6620, 2019, 
-      3862, 3863, 3864, 3860, 3850, 3851, 3853, 3854, 3855, 3857, 3858, 3859, 4638, 4643
-    ],
+    // todosItens: [
+    //   1001, 1004, 1006, 1011, 1018, 1026, 1027, 1028, 1029, 1031, 1033, 1036, 1037, 1038, 1042, 1043, 1052, 1053, 1057, 1058, 2003, 6695, 6662, 2015, 2031, 6609, 6664, 6694, 2065, 2138, 2139, 2140, 6676, 6675, 2420, 2421, 6677, 6656, 6660, 3001, 3003, 3006, 3009, 3011, 3020, 3024, 3031, 3033, 3035, 3036, 6655, 6632, 6653, 3044, 3046, 3047, 3050, 3051, 3053, 3057, 3065, 3066, 3067, 3068, 3070, 3071, 3072, 3074, 3075, 3076, 3077, 3078, 3082, 3083, 3085, 3086, 3089, 3091, 3094, 3095, 3100, 3102, 3105, 3107, 3108, 3109, 3110, 3111, 3113, 3114, 3115, 3116, 3117, 3123, 3124, 3133, 3134, 3135, 3139, 3140, 3142, 3143, 3145, 3152, 3153, 3155, 3156, 3157, 3158, 3165, 3179, 6333, 3190, 3191, 3193, 6693, 3211, 3222, 6630, 6631, 6692, 3504, 3508, 6671, 6670, 6691, 3742, 3748, 3801, 3802, 3814, 3004, 6673, 6672, 3916, 4005, 4401, 4628, 4629, 4630, 4632, 4633, 4635, 4636, 4637, 4642, 6029, 6035, 6616, 6617, 1516, 1517, 1518, 1519, 8001, 6696, 3119, 3121, 8020, 4644, 4645, 6665, 3161, 6667, 3803, 6657, 3084, 3087, 3023, 3012, 6620, 2019, 
+    //   3862, 3863, 3864, 3860, 3850, 3851, 3853, 3854, 3855, 3857, 3858, 3859, 4638, 4643
+    // ],
+    todosItens: [],
     itensCompletos: [],
     itensNaoCompletos: [
-      1001, 1004, 1006, 1011, 1018, 1026, 1027, 1028, 1029, 1031, 1033, 1036, 1037, 1038, 1042, 1043, 1052, 1053, 1057, 1058, 2003, 2015, 2019, 2031, 2138, 2139, 2140, 2420, 2421, 1516, 1517, 1518, 1519, 3012, 3023, 3024, 3035, 3044, 3051, 3057, 3066, 3067, 3070, 3076, 3077, 3082, 3086, 3105, 3108, 3113, 3114, 3123, 3133, 3134, 3140, 3145, 3155, 3191, 3211, 3801, 3802, 3803, 3916, 4630, 4632, 4642, 6029, 6660, 6670, 6677
+      1001, 1004, 1006, 1011, 1018, 1026, 1027, 1028, 1029, 1031, 1033, 1036, 1037, 1038, 1042, 1043, 1052, 1053, 1057, 1058, 2003, 2015, 2019, 2031, 2138, 2139, 2140, 2420, 2421, 1516, 1517, 1518, 1519, 3012, 3023, 3024, 3035, 3044, 3051, 3057, 3066, 3067, 3070, 3076, 3077, 3082, 3086, 3105, 3108, 3113, 3114, 3123, 3133, 3134, 3140, 3145, 3155, 3191, 3211, 3801, 3802, 3803, 3916, 4630, 4632, 4642, 6029, 6660, 6670, 6677, 1083, 1055
     ],
     itensSup: [3860, 3850, 3851, 3853, 3854, 3855, 3857, 3858, 3859],
     itensBotas: [3006, 3009, 3020, 3047, 3111, 3117, 3158],
@@ -92,7 +94,28 @@ export const useHistoricoStore = defineStore('Historico', {
       // console.log(JSON.parse(JSON.stringify(runasObj)));
     },
     async buscaItensCompletos() {
-      this.itensCompletos = this.todosItens.filter(item => !this.itensNaoCompletos.includes(item));
+
+      let numerosItens = [];
+
+      for (const key in arquivoItensRiot) {
+          if (arquivoItensRiot.hasOwnProperty(key) && arquivoItensRiot[key].mItems) {
+              const itemArray = arquivoItensRiot[key].mItems;
+
+              itemArray.forEach(item => {
+                  const numeroItem = item.match(/\d+/);
+
+                  if (numeroItem) {
+                    const numeroInteiro = parseInt(numeroItem[0], 10);
+                    if (!numerosItens.includes(numeroInteiro)) {
+                      numerosItens.push(numeroInteiro);
+                    }
+                  }
+              });
+          }
+      }
+      
+      this.itensCompletos = numerosItens.filter(item => !this.itensNaoCompletos.includes(item));
+      // this.itensCompletos = this.todosItens.filter(item => !this.itensNaoCompletos.includes(item));
     },
     async buscaSpells() {
       const url = await this.urlVersao();
@@ -235,10 +258,11 @@ export const useHistoricoStore = defineStore('Historico', {
           else bota = 1;
         }
 
-        if (inArray(valor.item, this.itensMiticos)) {
-          if (mitico > 0) return false;
-          else mitico = 1;
-        }
+        // usar quando tiver itens míticos, são itens principáis e únicos
+        // if (inArray(valor.item, this.itensMiticos)) {
+        //   if (mitico > 0) return false;
+        //   else mitico = 1;
+        // }
 
         if (inArray(valor.item, this.itensSup)) {
           if (sup > 0) return false;
@@ -262,10 +286,11 @@ export const useHistoricoStore = defineStore('Historico', {
             else bota = 1;
           }
 
-          if (inArray(valor.item, this.itensMiticos)) {
-            if (mitico > 0) return false;
-            else mitico = 1;
-          }
+          // usar quando tiver itens míticos, são itens principáis e únicos
+          // if (inArray(valor.item, this.itensMiticos)) {
+          //   if (mitico > 0) return false;
+          //   else mitico = 1;
+          // }
 
           if (inArray(valor.item, this.itensSup)) {
             if (sup > 0) return false;
