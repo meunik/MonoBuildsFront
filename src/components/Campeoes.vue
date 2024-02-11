@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, onUpdated } from 'vue';
 import { useCampeoesStore } from "@/stores/Campeoes";
 import { useRoute } from "vue-router";
 

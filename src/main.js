@@ -39,8 +39,6 @@ const app = createApp(App)
 
 app.use(router)
 app.use(pinia)
-import directives from "./directives";
-app.directive("hover", directives);
 
 router.isReady().then(() => {
   app.mount('#app')
