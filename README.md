@@ -8,8 +8,8 @@ Um projeto particular feito para listar os itens mais ultilizados pelos Monocham
 
 <!-- [![Preview in vscode.dev](https://img.shields.io/badge/preview%20in-vscode.dev-blue)](https://vscode.dev/editor/theme/SeilaColor.seilacolor) -->
 
-<img src="https://raw.githubusercontent.com/meunik/seilacolor/master/Captura1.png" width="100%"/>
-<img src="https://raw.githubusercontent.com/meunik/seilacolor/master/Captura2.png" width="100%"/>
-<img src="https://raw.githubusercontent.com/meunik/seilacolor/master/Captura3.png" width="100%"/>
+<img src="https://raw.githubusercontent.com/meunik/MonoBuildsFront/master/img/monoBuilds1.png" width="100%"/>
+<img src="https://raw.githubusercontent.com/meunik/MonoBuildsFront/master/img/monoBuilds2.png" width="100%"/>
+<img src="https://raw.githubusercontent.com/meunik/MonoBuildsFront/master/img/monoBuilds3.png" width="100%"/>
 
 </div>
