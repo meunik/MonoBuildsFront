@@ -6,7 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
     <title>MonoBuilds</title>
-    <script type="module" crossorigin src="./assets/index-972cc30f.js"></script>
+    
+    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+
+    <script>
+      window.googletag = window.googletag || { cmd: [] };
+
+      googletag.cmd.push(() => {
+        const responsiveAdSlot = googletag
+          .defineSlot(
+            "/6355419/Travel/Europe",
+            [
+              [300, 250],
+              [728, 90],
+              [750, 200],
+            ],
+            "responsive-ad",
+          )
+          .addService(googletag.pubads());
+
+        const mapping = googletag
+          .sizeMapping()
+          .addSize([728, 90], [728, 90])
+          .addSize([640, 480], [300, 250])
+          .addSize([300, 250], [300, 250])
+          .addSize([0, 0], [])
+          .build();
+
+        responsiveAdSlot.defineSizeMapping(mapping);
+        googletag.enableServices();
+
+        // Define an anchor ad slot that sticks to the bottom of the viewport.
+        // const anchorSlot = googletag.defineOutOfPageSlot(
+        //   "/6355419/Travel",
+        //   googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR,
+        // );
+        // if (anchorSlot) anchorSlot.setTargeting("test", "anchor").addService(googletag.pubads());
+        // googletag.pubads().enableSingleRequest();
+        // googletag.enableServices();
+      });
+    </script>
+    <script type="module" crossorigin src="./assets/index-5ca2a298.js"></script>
     <link rel="stylesheet" href="./assets/index-7474ab2b.css">
   </head>
   <body>
