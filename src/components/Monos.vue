@@ -3,7 +3,7 @@
     <div class="d-flex flex-column align-items-center">
       <div class="containerText">
         <p class="f-16 text-amarela">Monochampions.</p>
-        <p>6 itens mais feitos pelos jogadores do ranking Diamante 1 até Desafiante na solo/duo, com maior número de jogos com o personagem selecionado.</p>
+        <p class="f-10">6 itens mais feitos pelos jogadores do ranking Diamante 1 até Desafiante na solo/duo, com maior número de jogos com o personagem selecionado.</p>
       </div>
 
       <table class="table align-middle table-borderless table-dark table-hover">

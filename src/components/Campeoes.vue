@@ -28,7 +28,7 @@
     </div>
 
     <div class="containerText">
-      <p>No momento só tempos dados do servidor brasileiro.</p>
+      <p class="f-10">No momento só tempos dados do servidor brasileiro.</p>
       <p class="f-16 text-amarela">Escolha um campeão.</p>
     </div>
 
