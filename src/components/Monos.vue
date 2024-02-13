@@ -32,7 +32,7 @@
               </td>
               <td class="nomeTd tdPadding-sm">
                 <a
-                  :href="`https://www.op.gg/summoners/br/${lista.name}`"
+                  :href="`https://www.op.gg/summoners/br/${lista.internal_name}`"
                   target="_blank"
                   class="nome tresPontinhos-sm"
                 >

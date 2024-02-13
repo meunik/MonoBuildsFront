@@ -190,8 +190,8 @@ export const useHistoricoStore = defineStore('Historico', {
 
       monos.forEach(async mono => await this.listando(mono));
 
-      // console.log(JSON.parse(JSON.stringify(this.listaItens)));
       this.carregandoMais = false;
+      // console.log(JSON.parse(JSON.stringify(this.listaItens)));
     },
     async listando(player) {
       const stat = player.most_champion_stat;
@@ -204,7 +204,7 @@ export const useHistoricoStore = defineStore('Historico', {
         id: summoner.id,
         summoner_id: summoner.summoner_id,
         internal_name: summoner.internal_name,
-        name: summoner.name,
+        name: summoner.game_name,
         campeaoNameId: campeao.id,
         campeaoId: campeao.key,
         campeaoName: campeao.name,
@@ -303,14 +303,12 @@ export const useHistoricoStore = defineStore('Historico', {
         }
       }
 
-      const topSix = itensArray;
-      const topSixItens = [];
-      
-      for (const obj in topSix) topSixItens[`item${obj}`] = topSix[obj].item;
+      let listarItens = {};
+      for (const key in itensArray) listarItens[`item${key}`] = itensArray[key].item;
       
       this.listaItens[key] = {
         ...this.listaItens[key],
-        ...topSixItens
+        ...listarItens
       };
     },
     

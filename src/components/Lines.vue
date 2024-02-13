@@ -45,11 +45,11 @@
     </td>
     <td class="nomeTd tdPadding-sm">
       <a
-        :href="`https://www.op.gg/summoners/br/${line.summoner.name}`"
+        :href="`https://www.op.gg/summoners/br/${line.summoner.internal_name}`"
         target="_blank"
         class="nome nome-md tresPontinhos-sm max-w-sm-38"
       >
-        {{ line.summoner.name }}
+        {{ line.summoner.game_name }}
       </a>
     </td>
     <td class="">
