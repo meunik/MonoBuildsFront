@@ -13,7 +13,7 @@
             <th scope="col">Nicks</th>
             <th scope="col">{{(innerWidth < 768)?'R':'Rank'}}</th>
             <th scope="col">{{(innerWidth < 768)?'J':'Jogos'}}</th>
-            <th scope="col" class="d-none-sm">V/D</th>
+            <th scope="col">V/D</th>
             <th scope="col">Itens</th>
           </tr>
         </thead>
