@@ -1,13 +1,11 @@
 <template>
   <div class="monoContainer">
-    <!-- <div class="mb-32">
-      <input type="text" class="filtroCampeoes mr-20">
-      <router-link :to="`/campeoes`" class="routeBtn">
-        Campeoes
-      </router-link>
-    </div> -->
+    <div class="d-flex flex-column align-items-center">
+      <div class="containerText">
+        <p class="f-16 text-amarela">Monochampions.</p>
+        <p>6 itens mais feitos pelos jogadores do ranking Diamante 1 até Desafiante na solo/duo, com maior número de jogos com o personagem selecionado.</p>
+      </div>
 
-    <div>
       <table class="table align-middle table-borderless table-dark table-hover">
         <thead class="thead-listagem">
           <tr>
@@ -189,7 +187,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, createApp } from 'vue';
+import { ref, computed, onMounted, onUpdated, createApp } from 'vue';
 import { useHistoricoStore } from "@/stores/Historico";
 import { useRoute } from "vue-router";
 import UltimasPartidas from "@/components/UltimasPartidas.vue";

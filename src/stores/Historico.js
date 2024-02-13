@@ -172,6 +172,7 @@ export const useHistoricoStore = defineStore('Historico', {
     },
 
     async summoners(champ) {
+      this.carregandoMais = true;
       this.btnMais = true;
       this.limit = 10;
       this.listaItens = {};
@@ -190,6 +191,7 @@ export const useHistoricoStore = defineStore('Historico', {
       monos.forEach(async mono => await this.listando(mono));
 
       // console.log(JSON.parse(JSON.stringify(this.listaItens)));
+      this.carregandoMais = false;
     },
     async listando(player) {
       const stat = player.most_champion_stat;

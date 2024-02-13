@@ -64,6 +64,7 @@ button.selected:focus-visible {
 
 .monoContainer {
   width: 100%;
+  /* max-width: 800px; */
   display: flex;
   justify-content: center;
 }
@@ -104,6 +105,13 @@ body {
   font-weight: 600;
 }
 
+.text-link {
+  color: #bdbdbd !important;
+}
+.text-link:hover {
+  color: #dadada !important;
+}
+
 .text-color {
   color: #bdbdbd !important;
 }
@@ -130,6 +138,9 @@ input {
 input:focus, input:focus-visible {
   border: 1px solid #888888;
   outline: none;
+}
+.containerText {
+  max-width: 800px;
 }
 .containerChamp {
   max-width: 800px;

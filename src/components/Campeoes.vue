@@ -1,5 +1,10 @@
 <template>
   <div class="d-flex flex-column justify-content-center align-items-center">
+
+    <div class="containerText mt-40">
+      <p class="f-16 text-start">MONOBUILDS.com.br é uma ferramenta de guias rápidos para jogadores de League of Legends. Sua principal função é fornecer à comunidade de League of Legends acesso fácil aos 6 itens mais feitos pelos jogadores do ranking Diamante 1 até Desafiante na solo/duo, com maior número de jogos com o personagem selecionado.</p>
+    </div>
+
     <div class="d-flex flex-column flex-md-row gap-md-3 justify-content-center align-items-center">
       <input type="text" v-model="champStore.filtroCampeoes">
       <div class="containerLine">
@@ -20,6 +25,11 @@
           </button>
         </div>
       </div>
+    </div>
+
+    <div class="containerText">
+      <p>No momento só tempos dados do servidor brasileiro.</p>
+      <p class="f-16 text-amarela">Escolha um campeão.</p>
     </div>
 
     <div class="containerChamp">
